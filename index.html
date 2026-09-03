@@ -1,632 +1,228 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: Arial, "Noto Sans Devanagari", sans-serif;
-  background: #fffaf5;
-  color: #4b1024;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-/* =========================
-   TOP GUARANTEE BAR
-========================= */
-
-.top-bar {
-  width: 100%;
-  background: #76002d;
-  color: #fff;
-  text-align: center;
-  padding: 10px 15px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-  width: 100%;
-  background: #fff;
-  border-bottom: 1px solid #ead8c5;
-  padding: 14px 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-area img {
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
-}
-
-.logo-text h1 {
-  font-size: 25px;
-  color: #76002d;
-}
-
-.logo-text p {
-  font-size: 12px;
-  color: #8a6a55;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.nav a {
-  font-weight: 600;
-  color: #4b1024;
-  transition: 0.3s;
-}
-
-.nav a:hover {
-  color: #a86a13;
-}
-
-.cart-btn {
-  background: #76002d;
-  color: white;
-  border: none;
-  border-radius: 25px;
-  padding: 10px 18px;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-  min-height: 560px;
-  padding: 60px 6%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background:
-    linear-gradient(
-      90deg,
-      #fffaf3 0%,
-      #fff7ef 45%,
-      #f4dfcb 100%
-    );
-  overflow: hidden;
-}
-
-.hero-content {
-  width: 48%;
-}
-
-.hero-small {
-  color: #a86a13;
-  font-size: 13px;
-  letter-spacing: 3px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.hero h2 {
-  font-size: 58px;
-  line-height: 1.1;
-  color: #76002d;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  font-size: 18px;
-  color: #6d5145;
-  margin-bottom: 25px;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 15px;
-}
-
-.primary-btn {
-  background: #76002d;
-  color: #fff;
-  padding: 13px 25px;
-  border-radius: 25px;
-  border: none;
-  font-weight: bold;
-}
-
-.secondary-btn {
-  background: #fff;
-  color: #76002d;
-  padding: 13px 25px;
-  border-radius: 25px;
-  border: 1px solid #76002d;
-  font-weight: bold;
-}
-
-.hero-image {
-  width: 48%;
-  height: 480px;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(75, 16, 36, 0.15);
-}
-
-.hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* =========================
-   SECTION
-========================= */
-
-.section {
-  padding: 60px 5%;
-}
-
-.section-heading {
-  text-align: center;
-  margin-bottom: 35px;
-}
-
-.section-heading span {
-  color: #a86a13;
-  font-size: 12px;
-  letter-spacing: 3px;
-  font-weight: bold;
-}
-
-.section-heading h2 {
-  font-size: 38px;
-  color: #76002d;
-  margin-top: 8px;
-}
-
-/* =========================
-   CATEGORY GRID
-========================= */
-
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-}
-
-.category-card {
-  background: #fff;
-  border: 1px solid #e7cba9;
-  border-radius: 15px;
-  padding: 22px;
-  text-align: center;
-  transition: 0.3s;
-  box-shadow: 0 5px 20px rgba(80, 40, 20, 0.06);
-}
-
-.category-card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 12px 30px rgba(80, 40, 20, 0.12);
-}
-
-.category-card img {
-  width: 130px;
-  height: 130px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
-
-.category-card h3 {
-  font-size: 22px;
-  color: #76002d;
-  margin-bottom: 12px;
-}
-
-.category-card span {
-  display: inline-block;
-  background: #76002d;
-  color: white;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 13px;
-}
-
-/* =========================
-   PRODUCT GRID
-========================= */
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-}
-
-.product-card {
-  background: #fff;
-  border: 1px solid #ead8c5;
-  border-radius: 15px;
-  overflow: hidden;
-  transition: 0.3s;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(80, 40, 20, 0.12);
-}
-
-.product-image {
-  width: 100%;
-  height: 250px;
-  background: #f7f1eb;
-  overflow: hidden;
-}
-
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.product-info {
-  padding: 18px;
-}
-
-.product-info h3 {
-  font-size: 18px;
-  color: #4b1024;
-  margin-bottom: 8px;
-}
-
-.product-price {
-  font-size: 20px;
-  color: #76002d;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.metal-badge {
-  display: inline-block;
-  border: 1px solid #d0a45a;
-  color: #8a5a0a;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 12px;
-  margin-bottom: 12px;
-}
-
-.buy-btn {
-  width: 100%;
-  background: #76002d;
-  color: white;
-  border: none;
-  padding: 11px;
-  border-radius: 20px;
-  font-weight: bold;
-}
-
-/* =========================
-   GOLD / SILVER FILTER
-========================= */
-
-.filter-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 30px;
-}
-
-.filter-btn {
-  padding: 10px 22px;
-  border-radius: 22px;
-  border: 1px solid #76002d;
-  background: white;
-  color: #76002d;
-}
-
-.filter-btn.active,
-.filter-btn:hover {
-  background: #76002d;
-  color: white;
-}
-
-/* =========================
-   PRODUCT DETAILS
-========================= */
-
-.product-detail {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  padding: 60px 6%;
-}
-
-.product-detail-image {
-  width: 100%;
-  height: 520px;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #f6eee6;
-}
-
-.product-detail-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.product-detail-info h1 {
-  font-size: 42px;
-  color: #76002d;
-  margin-bottom: 15px;
-}
-
-.big-price {
-  font-size: 32px;
-  font-weight: bold;
-  color: #a86a13;
-  margin: 20px 0;
-}
-
-.guarantee-box {
-  background: #fff7df;
-  border: 1px solid #d8b15b;
-  padding: 15px;
-  border-radius: 12px;
-  margin: 20px 0;
-}
-
-/* =========================
-   CUSTOMER FORM
-========================= */
-
-.checkout {
-  max-width: 900px;
-  margin: auto;
-  padding: 50px 20px;
-}
-
-.checkout-box {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  border: 1px solid #ead8c5;
-  box-shadow: 0 8px 25px rgba(70, 30, 20, 0.08);
-}
-
-.checkout-box h2 {
-  color: #76002d;
-  margin-bottom: 25px;
-}
-
-.form-group {
-  margin-bottom: 18px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 7px;
-  font-weight: bold;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #d9c5b3;
-  border-radius: 10px;
-  outline: none;
-}
-
-.form-group textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-.location-btn {
-  background: #a86a13;
-  color: white;
-  border: none;
-  padding: 11px 18px;
-  border-radius: 20px;
-  margin-top: 8px;
-}
-
-/* =========================
-   PAYMENT
-========================= */
-
-.payment-box {
-  text-align: center;
-  background: white;
-  border: 1px solid #ead8c5;
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 500px;
-  margin: 40px auto;
-}
-
-.payment-box h2 {
-  color: #76002d;
-  margin-bottom: 15px;
-}
-
-.qr-code {
-  width: 250px;
-  height: 250px;
-  object-fit: contain;
-  margin: 20px auto;
-}
-
-.utr-input {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #d9c5b3;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-/* =========================
-   ADMIN PANEL
-========================= */
-
-.admin-container {
-  min-height: 100vh;
-  padding: 40px 5%;
-  background: #f8f1eb;
-}
-
-.admin-title {
-  color: #76002d;
-  margin-bottom: 30px;
-}
-
-.admin-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.admin-card {
-  background: white;
-  border-radius: 15px;
-  padding: 25px;
-  border: 1px solid #ead8c5;
-}
-
-.admin-card h3 {
-  color: #76002d;
-  margin-bottom: 15px;
-}
-
-.admin-card button {
-  background: #76002d;
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 20px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer {
-  background: #4b1024;
-  color: white;
-  padding: 45px 6%;
-  text-align: center;
-}
-
-.footer h2 {
-  margin-bottom: 10px;
-}
-
-.footer p {
-  color: #ead8c5;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 900px) {
-
-  .nav {
-    gap: 12px;
-  }
-
-  .nav a {
-    font-size: 13px;
-  }
-
-  .hero {
-    flex-direction: column;
-    gap: 35px;
-  }
-
-  .hero-content,
-  .hero-image {
-    width: 100%;
-  }
-
-  .hero h2 {
-    font-size: 42px;
-  }
-
-  .category-grid,
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .product-detail {
-    grid-template-columns: 1fr;
-  }
-
-  .admin-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-
-  .header {
-    padding: 10px 4%;
-  }
-
-  .logo-text h1 {
-    font-size: 19px;
-  }
-
-  .logo-area img {
-    width: 45px;
-    height: 45px;
-  }
-
-  .nav {
-    display: none;
-  }
-
-  .hero {
-    padding: 40px 5%;
-  }
-
-  .hero h2 {
-    font-size: 34px;
-  }
-
-  .category-grid,
-  .product-grid,
-  .admin-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .section-heading h2 {
-    font-size: 30px;
-  }
-}
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>बाईसा का श्रृंगार | Premium Artificial Jewellery</title>
+
+  <meta name="description"
+        content="बाईसा का श्रृंगार - Premium Artificial Jewellery. हार, कड़े, अंगूठियाँ, माथा पट्टी, पायल, नथ और Gift Items.">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- TOP GUARANTEE BAR -->
+  <div class="top-bar">
+    ✨ सामान की 5 साल कलर गारंटी ✨
+    <span>| Premium Artificial Jewellery</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <div class="logo-area">
+      <div class="logo-circle">ब</div>
+
+      <div>
+        <h1>बाईसा का श्रृंगार</h1>
+        <p>आपकी खूबसूरती, हमारी पहचान</p>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#">होम</a>
+      <a href="#categories">कैटेगरी</a>
+      <a href="#jewellery">ज्वेलरी</a>
+      <a href="#about">हमारे बारे में</a>
+      <a href="#contact">संपर्क करें</a>
+    </nav>
+
+    <div class="cart">
+      🛒 कार्ट <span id="cartCount">0</span>
+    </div>
+
+  </header>
+
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <p class="small-title">ROYAL • ELEGANT • AFFORDABLE</p>
+
+      <h2>
+        बाईसा का<br>
+        <strong>श्रृंगार</strong>
+      </h2>
+
+      <h3>
+        हर बाईसा के श्रृंगार के लिए<br>
+        खूबसूरत आभूषण
+      </h3>
+
+      <p>
+        हार | कड़े | अंगूठियाँ | माथा पट्टी | पायल | नथ | गिफ्ट आइटम
+      </p>
+
+      <div class="quality">
+        ✨ Premium Quality
+        &nbsp; | &nbsp;
+        💎 Elegant Designs
+        &nbsp; | &nbsp;
+        💖 Trusted
+      </div>
+
+      <div class="guarantee">
+        🛡️ सामान की 5 साल कलर गारंटी
+      </div>
+
+    </div>
+
+    <div class="hero-image">
+      <div class="bride-placeholder">
+        👰
+        <span>दुल्हन का फोटो यहाँ आएगा</span>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- CATEGORIES -->
+  <section id="categories" class="categories">
+
+    <p class="section-small">हमारा कलेक्शन</p>
+
+    <h2>श्रेणियाँ</h2>
+
+    <div class="category-grid">
+
+      <div class="category-card" onclick="openCategory('haar')">
+        <div class="category-icon">📿</div>
+        <h3>हार</h3>
+        <p>100+ डिज़ाइन</p>
+      </div>
+
+      <div class="category-card" onclick="openCategory('kade')">
+        <div class="category-icon">💍</div>
+        <h3>कड़े</h3>
+        <p>100+ डिज़ाइन</p>
+      </div>
+
+      <div class="category-card" onclick="openCategory('rings')">
+        <div class="category-icon">💎</div>
+        <h3>अंगूठियाँ</h3>
+        <p>100+ डिज़ाइन</p>
+      </div>
+
+      <div class="category-card" onclick="openCategory('mathapatti')">
+        <div class="category-icon">👑</div>
+        <h3>माथा पट्टी</h3>
+        <p>100+ डिज़ाइन</p>
+      </div>
+
+      <div class="category-card" onclick="openCategory('payal')">
+        <div class="category-icon">✨</div>
+        <h3>पायल</h3>
+        <p>100+ डिज़ाइन</p>
+      </div>
+
+      <div class="category-card" onclick="openCategory('nath')">
+        <div class="category-icon">⭕</div>
+        <h3>नथ</h3>
+        <p>100+ डिज़ाइन</p>
+      </div>
+
+      <div class="category-card" onclick="openCategory('gift')">
+        <div class="category-icon">🎁</div>
+        <h3>गिफ्ट आइटम</h3>
+        <p>100+ डिज़ाइन</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- JEWELLERY -->
+  <section id="jewellery" class="products">
+
+    <p class="section-small">OUR COLLECTION</p>
+
+    <h2>नए डिज़ाइन</h2>
+
+    <div id="productContainer" class="product-grid">
+
+      <div class="empty-products">
+        <div>💎</div>
+        <h3>जल्द ही शानदार डिज़ाइन आएंगे</h3>
+        <p>
+          Admin Panel से आप खुद फोटो, नाम और रेट डाल सकेंगे।
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+  <section class="features">
+
+    <div>
+      🚚
+      <h3>फ्री शिपिंग</h3>
+      <p>₹999 से अधिक के ऑर्डर पर</p>
+    </div>
+
+    <div>
+      🛡️
+      <h3>सुरक्षित भुगतान</h3>
+      <p>100% सुरक्षित भुगतान</p>
+    </div>
+
+    <div>
+      ↩️
+      <h3>7 दिन रिटर्न</h3>
+      <p>आसान रिटर्न पॉलिसी</p>
+    </div>
+
+    <div>
+      🎧
+      <h3>ग्राहक सहायता</h3>
+      <p>24x7 सहायता उपलब्ध</p>
+    </div>
+
+    <div>
+      ⭐
+      <h3>बेहतरीन क्वालिटी</h3>
+      <p>5 साल कलर गारंटी</p>
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <h2>बाईसा का श्रृंगार</h2>
+
+    <p>
+      Premium Artificial Jewellery
+    </p>
+
+    <p>
+      © 2026 बाईसा का श्रृंगार. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
