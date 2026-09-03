@@ -8,340 +8,314 @@
 
 <style>
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
 }
 
 body{
   font-family:Arial,"Noto Sans Devanagari",sans-serif;
-  background:#fffaf2;
-  color:#35150b;
-}
-
-button,input,textarea,select{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
+  background:#fffaf0;
+  color:#3b2410;
 }
 
 :root{
-  --maroon:#79002c;
-  --dark:#430019;
-  --gold:#c8952e;
-  --lightgold:#f5df9a;
-  --cream:#fff8e9;
-  --border:#e5c98a;
+  --gold:#c6922d;
+  --darkgold:#8b5a12;
+  --lightgold:#f8e6b0;
+  --cream:#fffaf0;
+  --brown:#4b2b12;
 }
 
-/* HEADER */
+/* TOP BAR */
 
 .topbar{
-  background:var(--dark);
-  color:#fff;
+  background:linear-gradient(90deg,#6d3e08,#c6922d,#6d3e08);
+  color:white;
   text-align:center;
   padding:8px;
   font-size:13px;
 }
 
+/* HEADER */
+
 header{
   position:sticky;
   top:0;
-  z-index:1000;
-  background:#fff;
-  border-bottom:1px solid var(--border);
+  z-index:100;
+  background:rgba(255,250,240,.97);
+  border-bottom:1px solid #e6c875;
+  box-shadow:0 3px 15px #0001;
 }
 
 .nav{
-  max-width:1250px;
+  max-width:1200px;
   margin:auto;
-  height:76px;
+  min-height:75px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 20px;
+  padding:10px 20px;
 }
 
 .logo{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
 }
 
-.logo-icon{
-  width:48px;
-  height:48px;
+.logo-circle{
+  width:50px;
+  height:50px;
   border:2px solid var(--gold);
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:var(--maroon);
-  font-size:25px;
+  font-size:27px;
+  font-weight:bold;
+  color:var(--darkgold);
+  background:#fff8df;
 }
 
 .logo h1{
-  color:var(--maroon);
-  font-size:22px;
+  font-size:21px;
+  color:#702000;
 }
 
-.logo small{
-  color:#777;
-  display:block;
-  font-size:11px;
+.logo p{
+  font-size:10px;
+  color:#8a6428;
 }
 
-.nav-actions{
+nav{
   display:flex;
-  align-items:center;
-  gap:10px;
+  gap:25px;
 }
 
-.icon-btn{
-  border:1px solid var(--border);
-  background:white;
-  border-radius:50%;
-  width:43px;
-  height:43px;
-  font-size:20px;
+nav a{
+  text-decoration:none;
+  color:#552b0b;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
 }
 
 .cart-btn{
-  background:var(--maroon);
-  color:#fff;
-  border:none;
+  border:0;
+  background:#76002f;
+  color:white;
+  padding:11px 18px;
   border-radius:25px;
-  padding:12px 18px;
+  cursor:pointer;
   font-weight:bold;
 }
 
 /* HERO */
 
 .hero{
-  min-height:480px;
   background:
-    linear-gradient(90deg,rgba(40,0,10,.9),rgba(40,0,10,.25)),
-    url("https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1600&q=85");
-  background-size:cover;
-  background-position:center;
+  radial-gradient(circle at 80% 30%,#f5d98c55,transparent 35%),
+  linear-gradient(110deg,#fff7e6,#f5dfb9);
+  min-height:420px;
   display:flex;
   align-items:center;
 }
 
-.hero-content{
-  max-width:1250px;
-  width:100%;
+.hero-inner{
+  width:1200px;
+  max-width:94%;
   margin:auto;
-  padding:60px 25px;
-  color:white;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
 }
 
-.hero-content .small{
-  color:var(--lightgold);
+.hero small{
   letter-spacing:4px;
-  font-size:13px;
+  color:#a06b18;
 }
 
 .hero h2{
   font-size:58px;
   line-height:1.05;
-  margin:18px 0;
+  color:#6e002d;
+  margin:15px 0;
+}
+
+.hero h2 span{
+  color:#b47a18;
 }
 
 .hero p{
   font-size:18px;
-  max-width:560px;
   line-height:1.7;
+  max-width:520px;
 }
 
-.gold-btn{
-  display:inline-block;
-  margin-top:25px;
-  background:linear-gradient(135deg,#f1d17a,#b57b17);
-  color:#3d1c00;
-  border:none;
-  padding:14px 25px;
-  border-radius:30px;
-  font-weight:bold;
-}
-
-/* SEARCH */
-
-.search-area{
-  max-width:900px;
-  margin:-28px auto 35px;
-  position:relative;
-  z-index:10;
-  padding:0 15px;
-}
-
-.search{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:40px;
-  padding:16px 22px;
+.badges{
   display:flex;
-  box-shadow:0 8px 30px rgba(0,0,0,.12);
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:20px;
 }
 
-.search input{
-  flex:1;
-  border:none;
-  outline:none;
-  font-size:16px;
+.badge{
+  background:#71002e;
+  color:white;
+  padding:9px 14px;
+  border-radius:20px;
+  font-size:12px;
 }
 
-/* SECTIONS */
+.hero-photo{
+  height:320px;
+  border-radius:25px;
+  background:
+  linear-gradient(135deg,#b98222,#ffe9a5,#9c6814,#f8d777);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 20px 50px #8b5a1230;
+  border:4px solid #fff4cf;
+  overflow:hidden;
+}
 
-.section{
-  max-width:1250px;
-  margin:55px auto;
-  padding:0 20px;
+.hero-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* SECTION */
+
+section{
+  padding:60px 20px;
 }
 
 .section-title{
   text-align:center;
-  margin-bottom:28px;
+  margin-bottom:35px;
 }
 
-.section-title .gold-line{
-  color:var(--gold);
-  letter-spacing:5px;
-  font-size:12px;
+.section-title small{
+  color:#b07920;
+  letter-spacing:3px;
 }
 
 .section-title h2{
-  color:var(--maroon);
-  font-size:32px;
+  color:#71002e;
+  font-size:35px;
   margin-top:8px;
 }
 
 /* CATEGORIES */
 
 .category-grid{
+  max-width:1200px;
+  margin:auto;
   display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:15px;
+  grid-template-columns:repeat(7,1fr);
+  gap:14px;
 }
 
-.category{
-  background:white;
-  border:1px solid var(--border);
+.category-card{
+  background:#fffdf7;
+  border:1px solid #e7c978;
   border-radius:15px;
-  padding:20px 10px;
+  padding:22px 10px;
   text-align:center;
+  cursor:pointer;
   transition:.25s;
 }
 
-.category:hover{
-  transform:translateY(-5px);
-  box-shadow:0 10px 25px rgba(121,0,44,.12);
+.category-card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 12px 30px #b8862b30;
+  background:#fff6d9;
 }
 
 .category-icon{
-  font-size:38px;
+  font-size:42px;
   margin-bottom:10px;
 }
 
-.category h3{
-  color:var(--maroon);
+.category-card h3{
+  color:#6d002c;
   font-size:16px;
 }
 
-.category p{
-  color:#888;
-  font-size:12px;
-  margin-top:5px;
+.category-card p{
+  margin-top:8px;
+  font-size:11px;
+  color:#9b6c21;
 }
 
 /* PRODUCTS */
 
-.filter-bar{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-bottom:25px;
-  flex-wrap:wrap;
+.products-section{
+  background:#fff4df;
 }
 
-.filter{
-  padding:10px 20px;
-  border-radius:25px;
-  border:1px solid var(--border);
-  background:white;
-  color:var(--maroon);
-}
-
-.filter.active{
-  background:var(--maroon);
-  color:#fff;
-}
-
-.products{
+.product-grid{
+  max-width:1200px;
+  margin:auto;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:18px;
+  gap:20px;
 }
 
 .product{
-  background:#fff;
-  border:1px solid #ead8ae;
+  background:white;
+  border:1px solid #e4c77c;
   border-radius:15px;
   overflow:hidden;
+  box-shadow:0 5px 20px #6b421020;
   transition:.25s;
 }
 
 .product:hover{
   transform:translateY(-5px);
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  box-shadow:0 15px 35px #6b421030;
 }
 
 .product-img{
-  height:220px;
-  background:#f6ead1;
-  position:relative;
+  height:230px;
   overflow:hidden;
+  background:#f5ead2;
 }
 
 .product-img img{
   width:100%;
   height:100%;
   object-fit:cover;
+  transition:.3s;
 }
 
-.badge{
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:var(--maroon);
-  color:white;
-  padding:5px 9px;
-  border-radius:15px;
-  font-size:10px;
+.product:hover img{
+  transform:scale(1.06);
 }
 
-.product-body{
-  padding:14px;
+.product-info{
+  padding:15px;
 }
 
-.product-body h3{
-  color:var(--maroon);
-  font-size:16px;
+.product-info h3{
+  color:#65002a;
   margin-bottom:7px;
 }
 
 .material{
   font-size:12px;
-  color:#777;
+  color:#8b6b35;
 }
 
 .price{
-  color:#a76d00;
-  font-weight:bold;
   font-size:19px;
-  margin:8px 0;
+  color:#a36a0e;
+  font-weight:bold;
+  margin:10px 0;
 }
 
 .product-buttons{
@@ -349,420 +323,260 @@ header{
   gap:7px;
 }
 
+.btn{
+  border:0;
+  cursor:pointer;
+  padding:10px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
 .view-btn{
   flex:1;
-  border:1px solid var(--maroon);
-  background:white;
-  color:var(--maroon);
-  padding:9px;
-  border-radius:7px;
+  background:#f5dfaa;
+  color:#633c09;
 }
 
 .add-btn{
   flex:1;
-  background:var(--maroon);
+  background:#71002e;
   color:white;
-  border:none;
-  padding:9px;
-  border-radius:7px;
 }
 
-/* MODAL */
+/* WHY */
 
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  z-index:2000;
-  padding:20px;
-  overflow:auto;
-}
-
-.modal.show{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.modal-box{
-  background:#fffaf1;
-  width:100%;
-  max-width:900px;
-  border-radius:20px;
-  overflow:hidden;
-  position:relative;
-}
-
-.close{
-  position:absolute;
-  right:15px;
-  top:15px;
-  z-index:5;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  border:none;
-  background:var(--maroon);
-  color:white;
-  font-size:22px;
-}
-
-.detail{
+.why{
+  max-width:1100px;
+  margin:auto;
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
 }
 
-.detail-image{
-  min-height:450px;
-}
-
-.detail-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.detail-info{
-  padding:45px 30px;
-}
-
-.detail-info h2{
-  color:var(--maroon);
-  font-size:30px;
-}
-
-.detail-info .big-price{
-  color:#a76d00;
-  font-size:28px;
-  font-weight:bold;
-  margin:20px 0;
-}
-
-.detail-info p{
-  color:#666;
-  line-height:1.7;
-}
-
-.quantity{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin:25px 0;
-}
-
-.quantity button{
-  width:35px;
-  height:35px;
-  border:1px solid var(--border);
-  background:white;
-  border-radius:7px;
-}
-
-/* DRAWER */
-
-.drawer{
-  position:fixed;
-  right:-450px;
-  top:0;
-  height:100%;
-  width:430px;
-  max-width:95%;
-  background:#fffaf1;
-  z-index:3000;
-  box-shadow:-10px 0 30px rgba(0,0,0,.25);
-  transition:.3s;
-  overflow:auto;
-}
-
-.drawer.open{
-  right:0;
-}
-
-.drawer-head{
-  background:var(--maroon);
-  color:white;
-  padding:20px;
-  display:flex;
-  justify-content:space-between;
-}
-
-.drawer-head button{
-  background:none;
-  color:white;
-  border:none;
-  font-size:24px;
-}
-
-.cart-items{
-  padding:15px;
-}
-
-.cart-item{
-  display:flex;
-  gap:10px;
-  background:white;
-  padding:10px;
-  border-radius:10px;
-  margin-bottom:10px;
-  border:1px solid var(--border);
-}
-
-.cart-item img{
-  width:75px;
-  height:75px;
-  object-fit:cover;
-  border-radius:8px;
-}
-
-.cart-item-info{
-  flex:1;
-}
-
-.cart-item-info h4{
-  color:var(--maroon);
-}
-
-.cart-total{
-  padding:20px;
-  border-top:1px solid var(--border);
-}
-
-.cart-total-row{
-  display:flex;
-  justify-content:space-between;
-  font-size:20px;
-  font-weight:bold;
-}
-
-.full-btn{
-  width:100%;
-  margin-top:15px;
-  padding:14px;
-  border:none;
-  border-radius:8px;
-  background:var(--maroon);
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-}
-
-/* CHECKOUT */
-
-.checkout{
-  max-width:650px;
-  margin:auto;
-  padding:20px;
-}
-
-.checkout h2{
-  color:var(--maroon);
-  margin-bottom:20px;
-}
-
-.form-group{
-  margin-bottom:15px;
-}
-
-.form-group label{
-  display:block;
-  margin-bottom:6px;
-  font-weight:bold;
-}
-
-.form-group input,
-.form-group textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  outline:none;
-}
-
-.form-group textarea{
-  min-height:100px;
-}
-
-/* PAYMENT */
-
-.payment-box{
-  max-width:550px;
-  margin:auto;
+.why-card{
   text-align:center;
-  background:white;
-  border:1px solid var(--border);
-  padding:30px;
+  background:#fff;
+  padding:25px;
+  border:1px solid #e8cc85;
   border-radius:15px;
 }
 
-.payment-box h2{
-  color:var(--maroon);
+.why-card div{
+  font-size:38px;
+  margin-bottom:10px;
 }
 
-.payment-amount{
-  font-size:32px;
-  color:#a76d00;
-  font-weight:bold;
-  margin:15px;
+.why-card h3{
+  color:#71002e;
+  margin-bottom:8px;
 }
 
-.upi-box{
-  border:2px dashed var(--gold);
-  padding:25px;
-  margin:20px 0;
-  border-radius:12px;
-}
-
-.upi-id{
-  font-size:18px;
-  font-weight:bold;
-  color:var(--maroon);
-  margin:10px;
-}
-
-.qr{
-  width:180px;
-  height:180px;
-  margin:15px auto;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      #111 0 4px,
-      #fff 4px 8px
-    );
-  border:12px solid white;
-  box-shadow:0 0 0 1px #ddd;
-}
-
-/* SUCCESS */
-
-.success{
-  text-align:center;
-  padding:60px 20px;
-}
-
-.success-icon{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  background:#239447;
-  color:white;
-  font-size:55px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:auto;
-}
-
-.success h2{
-  color:#239447;
-  margin:20px;
+.why-card p{
+  font-size:13px;
+  color:#765d3c;
 }
 
 /* FOOTER */
 
 footer{
-  background:var(--dark);
+  background:#4a2508;
   color:white;
   padding:45px 20px;
-  margin-top:70px;
+}
+
+.footer-inner{
+  max-width:1100px;
+  margin:auto;
   text-align:center;
 }
 
-footer h2{
-  color:var(--lightgold);
+.footer-inner h2{
+  color:#f3cd72;
+  margin-bottom:10px;
 }
 
-footer p{
-  color:#ddd;
-  margin-top:8px;
+.footer-inner p{
+  color:#f4e2bb;
+  margin:8px;
 }
 
-/* RESPONSIVE */
+/* MODAL */
 
-@media(max-width:1000px){
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0009;
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  background:#fffaf0;
+  max-width:850px;
+  width:100%;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  border:3px solid #d2a43b;
+}
+
+.close{
+  position:absolute;
+  right:15px;
+  top:12px;
+  width:35px;
+  height:35px;
+  border:0;
+  border-radius:50%;
+  background:#71002e;
+  color:white;
+  cursor:pointer;
+  font-size:20px;
+  z-index:2;
+}
+
+.modal-content{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.modal-content img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+}
+
+.modal-info{
+  padding:40px 30px;
+}
+
+.modal-info h2{
+  color:#71002e;
+  font-size:30px;
+}
+
+.modal-info .big-price{
+  font-size:28px;
+  color:#a36a0e;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+.modal-info p{
+  line-height:1.8;
+  color:#644d32;
+}
+
+.modal-info button{
+  margin-top:25px;
+  width:100%;
+  padding:14px;
+  background:#71002e;
+  color:white;
+  border:0;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* CART */
+
+.cart-list{
+  max-width:700px;
+  margin:auto;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:white;
+  padding:15px;
+  margin-bottom:10px;
+  border:1px solid #e2c577;
+  border-radius:10px;
+}
+
+.cart-total{
+  text-align:center;
+  font-size:22px;
+  color:#71002e;
+  margin:25px;
+  font-weight:bold;
+}
+
+.whatsapp{
+  display:block;
+  max-width:400px;
+  margin:auto;
+  text-align:center;
+  background:#168c3a;
+  color:white;
+  text-decoration:none;
+  padding:15px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
   .category-grid{
     grid-template-columns:repeat(4,1fr);
   }
 
-  .products{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-@media(max-width:700px){
-
-  .nav{
-    height:65px;
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .logo h1{
-    font-size:17px;
-  }
-
-  .logo-icon{
-    width:40px;
-    height:40px;
-  }
-
-  .hero{
-    min-height:440px;
+  .hero-inner{
+    grid-template-columns:1fr;
+    padding:30px 0;
   }
 
   .hero h2{
-    font-size:39px;
+    font-size:42px;
   }
 
+  .why{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  nav{
+    display:none;
+  }
+}
+
+@media(max-width:600px){
   .category-grid{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-  }
-
-  .product-img{
-    height:170px;
-  }
-
-  .detail{
+  .product-grid{
     grid-template-columns:1fr;
   }
 
-  .detail-image{
-    min-height:300px;
+  .why{
+    grid-template-columns:1fr;
   }
 
-  .detail-info{
-    padding:25px;
-  }
-}
-
-@media(max-width:450px){
-
-  .products{
-    grid-template-columns:1fr 1fr;
+  .modal-content{
+    grid-template-columns:1fr;
   }
 
-  .product-img{
-    height:145px;
+  .modal-content img{
+    height:260px;
   }
 
-  .product-body{
-    padding:10px;
-  }
-
-  .product-body h3{
-    font-size:14px;
-  }
-
-  .price{
-    font-size:16px;
-  }
-
-  .cart-btn{
-    padding:10px;
+  .hero h2{
+    font-size:38px;
   }
 }
 </style>
@@ -771,166 +585,195 @@ footer p{
 <body>
 
 <div class="topbar">
-✨ प्रीमियम गोल्ड ज्वेलरी • सुरक्षित खरीदारी • पूरे भारत में डिलीवरी ✨
+  ✨ सामान की 5 साल तक कवर गारंटी ✨ | Premium Gold Jewellery
 </div>
 
 <header>
-<div class="nav">
+  <div class="nav">
 
-<div class="logo">
-<div class="logo-icon">ब</div>
-<div>
-<h1>बाईसा का श्रृंगार</h1>
-<small>आपकी खूबसूरती, हमारा श्रृंगार</small>
-</div>
-</div>
+    <div class="logo">
+      <div class="logo-circle">ब</div>
+      <div>
+        <h1>बाईसा का श्रृंगार</h1>
+        <p>आपकी खूबसूरती, हमारी पहचान</p>
+      </div>
+    </div>
 
-<div class="nav-actions">
+    <nav>
+      <a onclick="goHome()">होम</a>
+      <a onclick="scrollToCategories()">कैटेगरी</a>
+      <a onclick="scrollToProducts()">ज्वेलरी</a>
+      <a onclick="scrollToWhy()">हमारे बारे में</a>
+      <a onclick="openCart()">कार्ट</a>
+    </nav>
 
-<button class="icon-btn" onclick="scrollToProducts()">
-🔍
-</button>
+    <button class="cart-btn" onclick="openCart()">
+      🛒 कार्ट <span id="cartCount">0</span>
+    </button>
 
-<button class="cart-btn" onclick="openCart()">
-🛒 कार्ट <span id="cartCount">0</span>
-</button>
-
-</div>
-</div>
+  </div>
 </header>
 
 
 <!-- HERO -->
 
-<section class="hero">
+<section class="hero" id="home">
 
-<div class="hero-content">
+  <div class="hero-inner">
 
-<div class="small">
-ROYAL • ELEGANT • GOLD
-</div>
+    <div>
+      <small>ROYAL • ELEGANT • PREMIUM</small>
 
-<h2>
-हर बाईसा के<br>
-श्रृंगार के लिए<br>
-एक ही नाम
-</h2>
+      <h2>
+        बाईसा का<br>
+        <span>श्रृंगार</span>
+      </h2>
 
-<p>
-पारंपरिक राजस्थानी खूबसूरती और आधुनिक डिजाइन का
-खूबसूरत संगम — बाईसा का श्रृंगार।
-</p>
+      <p>
+        हर बाईसा के श्रृंगार के लिए
+        खूबसूरत और शानदार गोल्ड ज्वेलरी।
+        अपनी पसंद का डिजाइन चुनें और सीधे हमसे संपर्क करें।
+      </p>
 
-<button class="gold-btn" onclick="scrollToCategories()">
-हमारी Jewellery देखें →
-</button>
+      <div class="badges">
+        <span class="badge">✨ Premium Quality</span>
+        <span class="badge">💎 Elegant Designs</span>
+        <span class="badge">🛡️ Trusted</span>
+      </div>
 
-</div>
+    </div>
+
+    <div class="hero-photo">
+      <img
+        src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85"
+        alt="Gold Jewellery">
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- SEARCH -->
-
-<div class="search-area">
-
-<div class="search">
-
-<span>🔎</span>
-
-<input
-id="searchInput"
-type="text"
-placeholder="Jewellery खोजें... जैसे हार, अंगूठी, कड़ा"
-oninput="searchProducts()"
->
-
-</div>
-
-</div>
-
-
 <!-- CATEGORIES -->
 
-<section class="section" id="categories">
+<section id="categories">
 
-<div class="section-title">
+  <div class="section-title">
+    <small>हमारा कलेक्शन</small>
+    <h2>श्रेणियाँ</h2>
+  </div>
 
-<div class="gold-line">
-✦ ✦ ✦
-</div>
+  <div class="category-grid">
 
-<h2>हमारी कैटेगरी</h2>
+    <div class="category-card" onclick="showCategory('हार')">
+      <div class="category-icon">📿</div>
+      <h3>हार</h3>
+      <p>100+ डिज़ाइन</p>
+    </div>
 
-<p>
-अपनी पसंद की Jewellery Category चुनें
-</p>
+    <div class="category-card" onclick="showCategory('कड़े')">
+      <div class="category-icon">💍</div>
+      <h3>कड़े</h3>
+      <p>100+ डिज़ाइन</p>
+    </div>
 
-</div>
+    <div class="category-card" onclick="showCategory('अंगूठियाँ')">
+      <div class="category-icon">💎</div>
+      <h3>अंगूठियाँ</h3>
+      <p>100+ डिज़ाइन</p>
+    </div>
 
-<div
-class="category-grid"
-id="categoryGrid"
-></div>
+    <div class="category-card" onclick="showCategory('माथा पट्टी')">
+      <div class="category-icon">👑</div>
+      <h3>माथा पट्टी</h3>
+      <p>100+ डिज़ाइन</p>
+    </div>
+
+    <div class="category-card" onclick="showCategory('पायल')">
+      <div class="category-icon">✨</div>
+      <h3>पायल</h3>
+      <p>100+ डिज़ाइन</p>
+    </div>
+
+    <div class="category-card" onclick="showCategory('नथ')">
+      <div class="category-icon">🌸</div>
+      <h3>नथ</h3>
+      <p>100+ डिज़ाइन</p>
+    </div>
+
+    <div class="category-card" onclick="showCategory('गिफ्ट आइटम')">
+      <div class="category-icon">🎁</div>
+      <h3>गिफ्ट आइटम</h3>
+      <p>100+ डिज़ाइन</p>
+    </div>
+
+  </div>
 
 </section>
 
 
 <!-- PRODUCTS -->
 
-<section class="section" id="products">
+<section class="products-section" id="products">
 
-<div class="section-title">
+  <div class="section-title">
+    <small>OUR COLLECTION</small>
+    <h2 id="productTitle">गोल्ड ज्वेलरी</h2>
+  </div>
 
-<div class="gold-line">
-PREMIUM GOLD COLLECTION
-</div>
+  <div class="product-grid" id="productGrid"></div>
 
-<h2 id="productTitle">
-लोकप्रिय Gold Jewellery
-</h2>
-
-</div>
+</section>
 
 
-<div class="filter-bar">
+<!-- WHY US -->
 
-<button
-class="filter active"
-onclick="filterMetal('all',this)"
->
-सभी
-</button>
+<section id="why">
 
-<button
-class="filter"
-onclick="filterMetal('Gold',this)"
->
-🥇 Gold
-</button>
+  <div class="section-title">
+    <small>WHY BAISA</small>
+    <h2>हमारी खासियत</h2>
+  </div>
 
-</div>
+  <div class="why">
 
+    <div class="why-card">
+      <div>💎</div>
+      <h3>Premium Quality</h3>
+      <p>बेहतरीन क्वालिटी और शानदार डिजाइन।</p>
+    </div>
 
-<div
-class="products"
-id="productGrid"
-></div>
+    <div class="why-card">
+      <div>🛡️</div>
+      <h3>5 साल की गारंटी</h3>
+      <p>सामान पर 5 साल तक कवर गारंटी।</p>
+    </div>
+
+    <div class="why-card">
+      <div>🚚</div>
+      <h3>सुरक्षित डिलीवरी</h3>
+      <p>आपके सामान की सुरक्षित डिलीवरी।</p>
+    </div>
+
+    <div class="why-card">
+      <div>❤️</div>
+      <h3>भरोसेमंद सेवा</h3>
+      <p>ग्राहकों के लिए हमेशा बेहतर सेवा।</p>
+    </div>
+
+  </div>
 
 </section>
 
 
 <footer>
 
-<h2>💎 बाईसा का श्रृंगार</h2>
-
-<p>
-Premium Gold Jewellery • Royal Designs • Trusted Shopping
-</p>
-
-<p>
-© 2026 बाईसा का श्रृंगार. All Rights Reserved.
-</p>
+  <div class="footer-inner">
+    <h2>बाईसा का श्रृंगार</h2>
+    <p>आपकी खूबसूरती, हमारी पहचान ❤️</p>
+    <p>Premium Gold Jewellery Collection</p>
+    <p>📞 WhatsApp पर ऑर्डर करें</p>
+  </div>
 
 </footer>
 
@@ -939,470 +782,222 @@ Premium Gold Jewellery • Royal Designs • Trusted Shopping
 
 <div class="modal" id="productModal">
 
-<div class="modal-box">
+  <div class="modal-box">
 
-<button
-class="close"
-onclick="closeProduct()"
->
-×
-</button>
+    <button class="close" onclick="closeModal()">×</button>
 
-<div class="detail">
+    <div class="modal-content">
 
-<div class="detail-image">
-<img id="detailImage">
-</div>
+      <img id="modalImage">
 
-<div class="detail-info">
+      <div class="modal-info">
 
-<h2 id="detailName"></h2>
+        <h2 id="modalName"></h2>
 
-<div class="big-price" id="detailPrice"></div>
+        <div class="big-price" id="modalPrice"></div>
 
-<p id="detailMaterial"></p>
+        <p id="modalMaterial"></p>
 
-<br>
+        <p id="modalDescription"></p>
 
-<p id="detailDescription"></p>
+        <button id="modalCartButton">
+          🛒 कार्ट में डालें
+        </button>
 
-<div class="quantity">
+      </div>
 
-<button onclick="changeQty(-1)">−</button>
+    </div>
 
-<span id="detailQty">1</span>
-
-<button onclick="changeQty(1)">+</button>
-
-</div>
-
-<button
-class="full-btn"
-onclick="addDetailToCart()"
->
-🛒 कार्ट में डालें
-</button>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- CART DRAWER -->
-
-<div class="drawer" id="cartDrawer">
-
-<div class="drawer-head">
-
-<h2>🛒 मेरा कार्ट</h2>
-
-<button onclick="closeCart()">×</button>
-
-</div>
-
-<div
-class="cart-items"
-id="cartItems"
-></div>
-
-<div class="cart-total">
-
-<div class="cart-total-row">
-
-<span>कुल राशि</span>
-
-<span id="cartTotal">
-₹0
-</span>
-
-</div>
-
-<button
-class="full-btn"
-onclick="checkout()"
->
-आगे बढ़ें →
-</button>
-
-</div>
+  </div>
 
 </div>
 
 
-<!-- CHECKOUT MODAL -->
+<!-- CART MODAL -->
 
-<div class="modal" id="checkoutModal">
+<div class="modal" id="cartModal">
 
-<div class="modal-box">
+  <div class="modal-box">
 
-<button
-class="close"
-onclick="closeCheckout()"
->
-×
-</button>
+    <button class="close" onclick="closeCart()">×</button>
 
-<div class="checkout">
+    <div style="padding:35px">
 
-<h2>📦 Delivery Details</h2>
+      <div class="section-title">
+        <h2>🛒 आपका कार्ट</h2>
+      </div>
 
-<div class="form-group">
+      <div class="cart-list" id="cartList"></div>
 
-<label>पूरा नाम</label>
+      <div class="cart-total" id="cartTotal">
+        कुल: ₹0
+      </div>
 
-<input
-id="customerName"
-placeholder="आपका नाम"
->
+      <a
+        class="whatsapp"
+        id="whatsappOrder"
+        target="_blank">
+        📱 WhatsApp पर ऑर्डर करें
+      </a>
 
-</div>
+    </div>
 
+  </div>
 
-<div class="form-group">
-
-<label>मोबाइल नंबर</label>
-
-<input
-id="customerPhone"
-placeholder="10 अंकों का मोबाइल नंबर"
-maxlength="10"
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>शहर / गाँव</label>
-
-<input
-id="customerCity"
-placeholder="शहर / गाँव"
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>पूरा पता</label>
-
-<textarea
-id="customerAddress"
-placeholder="मकान नंबर, गली, मोहल्ला, पिन कोड..."
-></textarea>
-
-</div>
-
-
-<button
-class="full-btn"
-onclick="goPayment()"
->
-Payment पर जाएँ →
-</button>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- PAYMENT MODAL -->
-
-<div class="modal" id="paymentModal">
-
-<div class="modal-box">
-
-<button
-class="close"
-onclick="closePayment()"
->
-×
-</button>
-
-<div class="payment-box">
-
-<h2>💳 Payment करें</h2>
-
-<div class="payment-amount">
-₹<span id="paymentAmount">0</span>
-</div>
-
-<div class="upi-box">
-
-<h3>UPI से Payment करें</h3>
-
-<div class="qr"></div>
-
-<div class="upi-id">
-baisakashringar@upi
-</div>
-
-<p>
-ऊपर दिए UPI ID पर payment करें।
-</p>
-
-</div>
-
-
-<div class="form-group">
-
-<label>UPI / UTR Number</label>
-
-<input
-id="utrNumber"
-placeholder="Payment के बाद UTR नंबर डालें"
->
-
-</div>
-
-
-<button
-class="full-btn"
-onclick="completeOrder()"
->
-✅ Payment Complete करें
-</button>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- SUCCESS MODAL -->
-
-<div class="modal" id="successModal">
-
-<div class="modal-box">
-
-<div class="success">
-
-<div class="success-icon">
-✓
-</div>
-
-<h2>
-ऑर्डर सफलतापूर्वक प्लेस हो गया!
-</h2>
-
-<p>
-आपका ऑर्डर हमें मिल गया है।
-</p>
-
-<br>
-
-<p>
-<strong>Order ID:</strong>
-<span id="orderId"></span>
-</p>
-
-<br>
-
-<p>
-हम आपके दिए हुए मोबाइल नंबर पर संपर्क करेंगे।
-</p>
-
-<button
-class="full-btn"
-onclick="location.reload()"
->
-होम पेज पर जाएँ
-</button>
-
-</div>
-
-</div>
 </div>
 
 
 <script>
 
-/* ======================================
-   CATEGORIES
-====================================== */
+/* =========================
+   PRODUCT DATA
+========================= */
 
-const categories = [
-"हार",
-"रानी हार",
-"चोकर",
-"लंबा हार",
-"हार सेट",
-"कड़े",
-"चूड़ियाँ",
-"कड़ा सेट",
-"अंगूठियाँ",
-"लेडीज रिंग",
-"फिंगर रिंग",
-"माथा पट्टी",
-"बोरला",
-"रखड़ी",
-"पायल",
-"झांझर",
-"नथ",
-"नथनी",
-"कान के झुमके",
-"कुंदन झुमके",
-"बाली",
-"टॉप्स",
-"टीका",
-"बाजूबंद",
-"कमरबंद",
-"हाथ फूल",
-"मंगलसूत्र",
-"लटकन",
-"नेकलेस",
-"ब्राइडल सेट",
-"राजस्थानी सेट",
-"कुंदन सेट",
-"मीना सेट",
-"ऑक्सीडाइज्ड",
-"गिफ्ट आइटम",
-"बच्चों की ज्वेलरी",
-"दुल्हन कलेक्शन",
-"फेस्टिवल कलेक्शन",
-"स्पेशल डिजाइन",
-"नया कलेक्शन"
+const products = [
+
+{
+ id:"har-001",
+ category:"हार",
+ name:"Royal Gold Necklace",
+ price:29999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=700&q=85",
+ description:"शानदार Royal Gold Necklace डिजाइन। शादी और खास अवसरों के लिए शानदार।"
+},
+
+{
+ id:"har-002",
+ category:"हार",
+ name:"Traditional Gold Haar",
+ price:45999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=700&q=85",
+ description:"Traditional look के साथ premium gold haar."
+},
+
+{
+ id:"kade-001",
+ category:"कड़े",
+ name:"Royal Gold Kada",
+ price:18999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=700&q=85",
+ description:"Premium royal gold kada design."
+},
+
+{
+ id:"kade-002",
+ category:"कड़े",
+ name:"Traditional Kada",
+ price:22999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=700&q=85",
+ description:"Traditional design वाला खूबसूरत kada."
+},
+
+{
+ id:"ring-001",
+ category:"अंगूठियाँ",
+ name:"Diamond Gold Ring",
+ price:12999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=700&q=85",
+ description:"Elegant diamond style gold ring."
+},
+
+{
+ id:"ring-002",
+ category:"अंगूठियाँ",
+ name:"Royal Ring",
+ price:15999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=700&q=85",
+ description:"Royal premium ring collection."
+},
+
+{
+ id:"matha-001",
+ category:"माथा पट्टी",
+ name:"Royal Matha Patti",
+ price:24999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=700&q=85",
+ description:"Bridal look के लिए royal matha patti."
+},
+
+{
+ id:"payal-001",
+ category:"पायल",
+ name:"Gold Payal Design",
+ price:8999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=700&q=85",
+ description:"सुंदर traditional payal design."
+},
+
+{
+ id:"nath-001",
+ category:"नथ",
+ name:"Royal Nath",
+ price:6999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&w=700&q=85",
+ description:"Bridal और traditional look के लिए शानदार नथ."
+},
+
+{
+ id:"gift-001",
+ category:"गिफ्ट आइटम",
+ name:"Premium Gold Gift",
+ price:9999,
+ material:"Gold Jewellery",
+ image:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=700&q=85",
+ description:"खास अवसर के लिए premium jewellery gift."
+}
+
 ];
 
-const icons=[
-"📿","💎","✨","👑","💍",
-"🌸","🥇","💠","💖","🎀"
-];
 
+/* =========================
+   CART
+========================= */
 
-/* ======================================
-   PRODUCTS
-====================================== */
+let cart=[];
 
-let products=[];
-
-categories.forEach((cat,catIndex)=>{
-
-  for(let i=1;i<=50;i++){
-
-    products.push({
-
-      id:"P"+catIndex+"-"+i,
-
-      name:
-      cat+" डिजाइन "+i,
-
-      category:cat,
-
-      material:"Gold",
-
-      price:
-      999 +
-      (catIndex*150) +
-      (i*100),
-
-      image:
-      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=700&q=80",
-
-      description:
-      "यह एक खूबसूरत प्रीमियम गोल्ड ज्वेलरी डिजाइन है। शादी, त्योहार और खास अवसरों के लिए शानदार विकल्प।"
-
-    });
-
-  }
-
-});
-
-
-/* ======================================
-   STATE
-====================================== */
-
-let cart =
-JSON.parse(localStorage.getItem("baisaCart") || "[]");
-
-let selectedProduct=null;
-
-let detailQty=1;
-
-let currentProducts=[...products];
-
-
-/* ======================================
-   LOAD CATEGORIES
-====================================== */
-
-function loadCategories(){
-
-  const grid=
-  document.getElementById("categoryGrid");
-
-  grid.innerHTML="";
-
-  categories.forEach((cat,i)=>{
-
-    const card=
-    document.createElement("div");
-
-    card.className="category";
-
-    card.innerHTML=`
-
-      <div class="category-icon">
-        ${icons[i%icons.length]}
-      </div>
-
-      <h3>${cat}</h3>
-
-      <p>50+ Gold Designs</p>
-
-    `;
-
-    card.onclick=()=>{
-
-      document.getElementById(
-        "productTitle"
-      ).innerText=cat;
-
-      currentProducts=
-      products.filter(
-        p=>p.category===cat
-      );
-
-      renderProducts();
-
-      document
-      .getElementById("products")
-      .scrollIntoView({
-        behavior:"smooth"
-      });
-
-    };
-
-    grid.appendChild(card);
-
-  });
-
+try{
+  cart=JSON.parse(localStorage.getItem("baisaCart")) || [];
+}catch(e){
+  cart=[];
 }
 
 
-/* ======================================
-   PRODUCTS
-====================================== */
+/* =========================
+   LOAD PRODUCTS
+========================= */
 
-function renderProducts(){
+function loadProducts(list){
 
-  const grid=
-  document.getElementById("productGrid");
+  const grid=document.getElementById("productGrid");
 
   grid.innerHTML="";
 
-  currentProducts
-  .slice(0,40)
-  .forEach(product=>{
+  if(list.length===0){
 
-    const card=
-    document.createElement("div");
+    grid.innerHTML=`
+      <div style="
+      grid-column:1/-1;
+      text-align:center;
+      padding:50px">
+        <h2>इस कैटेगरी में अभी डिजाइन नहीं हैं</h2>
+      </div>
+    `;
+
+    return;
+  }
+
+  list.forEach(product=>{
+
+    const card=document.createElement("div");
 
     card.className="product";
 
@@ -1410,26 +1005,18 @@ function renderProducts(){
 
       <div class="product-img">
 
-        <span class="badge">
-          GOLD
-        </span>
-
         <img
-          src="${product.image}"
-          alt="${product.name}"
-          loading="lazy"
-        >
+        src="${product.image}"
+        alt="${product.name}">
 
       </div>
 
-      <div class="product-body">
+      <div class="product-info">
 
-        <h3>
-          ${product.name}
-        </h3>
+        <h3>${product.name}</h3>
 
         <div class="material">
-          🥇 ${product.material}
+          ${product.material}
         </div>
 
         <div class="price">
@@ -1439,23 +1026,20 @@ function renderProducts(){
         <div class="product-buttons">
 
           <button
-            class="view-btn"
-            onclick="openProduct('${product.id}')"
-          >
-            देखें
+          class="btn view-btn"
+          onclick="viewProduct('${product.id}')">
+          देखें
           </button>
 
           <button
-            class="add-btn"
-            onclick="addToCart('${product.id}')"
-          >
-            🛒
+          class="btn add-btn"
+          onclick="addToCart('${product.id}')">
+          🛒 जोड़ें
           </button>
 
         </div>
 
       </div>
-
     `;
 
     grid.appendChild(card);
@@ -1465,118 +1049,79 @@ function renderProducts(){
 }
 
 
-/* ======================================
-   PRODUCT DETAIL
-====================================== */
+/* =========================
+   CATEGORY
+========================= */
 
-function openProduct(id){
+function showCategory(category){
 
-  selectedProduct=
-  products.find(p=>p.id===id);
+  document.getElementById("productTitle").innerText=category;
 
-  if(!selectedProduct)return;
+  const list=products.filter(
+    p=>p.category===category
+  );
 
-  detailQty=1;
+  loadProducts(list);
 
-  document.getElementById(
-    "detailImage"
-  ).src=selectedProduct.image;
+  document.getElementById("products")
+  .scrollIntoView({
+    behavior:"smooth"
+  });
+}
 
-  document.getElementById(
-    "detailName"
-  ).innerText=selectedProduct.name;
 
-  document.getElementById(
-    "detailPrice"
-  ).innerText=
-  "₹"+selectedProduct.price.toLocaleString("en-IN");
+/* =========================
+   PRODUCT VIEW
+========================= */
 
-  document.getElementById(
-    "detailMaterial"
-  ).innerText=
-  "🥇 "+selectedProduct.material+
-  " • Premium Quality";
+function viewProduct(id){
 
-  document.getElementById(
-    "detailDescription"
-  ).innerText=
-  selectedProduct.description;
+  const product=products.find(p=>p.id===id);
 
-  document.getElementById(
-    "detailQty"
-  ).innerText=detailQty;
+  if(!product)return;
 
-  document.getElementById(
-    "productModal"
-  ).classList.add("show");
+  document.getElementById("modalImage").src=product.image;
+
+  document.getElementById("modalName").innerText=product.name;
+
+  document.getElementById("modalPrice").innerText=
+    "₹"+product.price.toLocaleString("en-IN");
+
+  document.getElementById("modalMaterial").innerText=
+    "💎 "+product.material;
+
+  document.getElementById("modalDescription").innerText=
+    product.description;
+
+  document.getElementById("modalCartButton").onclick=function(){
+    addToCart(product.id);
+    closeModal();
+  };
+
+  document.getElementById("productModal")
+  .classList.add("active");
+}
+
+
+function closeModal(){
+
+  document.getElementById("productModal")
+  .classList.remove("active");
 
 }
 
 
-function closeProduct(){
-
-  document
-  .getElementById("productModal")
-  .classList.remove("show");
-
-}
-
-
-function changeQty(amount){
-
-  detailQty+=amount;
-
-  if(detailQty<1)
-    detailQty=1;
-
-  if(detailQty>10)
-    detailQty=10;
-
-  document.getElementById(
-    "detailQty"
-  ).innerText=detailQty;
-
-}
-
-
-function addDetailToCart(){
-
-  if(!selectedProduct)return;
-
-  for(let i=0;i<detailQty;i++){
-    cart.push(selectedProduct);
-  }
-
-  saveCart();
-
-  closeProduct();
-
-  openCart();
-
-}
-
-
-/* ======================================
+/* =========================
    CART
-====================================== */
+========================= */
 
 function addToCart(id){
 
-  const product=
-  products.find(p=>p.id===id);
+  const product=products.find(p=>p.id===id);
 
   if(!product)return;
 
   cart.push(product);
-
-  saveCart();
-
-  alert("✅ Product cart में जोड़ दिया गया।");
-
-}
-
-
-function saveCart(){
 
   localStorage.setItem(
     "baisaCart",
@@ -1585,125 +1130,98 @@ function saveCart(){
 
   updateCartCount();
 
+  alert("✅ आइटम कार्ट में जोड़ दिया गया।");
 }
 
 
 function updateCartCount(){
 
-  document.getElementById(
-    "cartCount"
-  ).innerText=cart.length;
+  document.getElementById("cartCount")
+  .innerText=cart.length;
 
 }
 
 
 function openCart(){
 
-  renderCart();
+  const list=document.getElementById("cartList");
 
-  document
-  .getElementById("cartDrawer")
-  .classList.add("open");
-
-}
-
-
-function closeCart(){
-
-  document
-  .getElementById("cartDrawer")
-  .classList.remove("open");
-
-}
-
-
-function renderCart(){
-
-  const box=
-  document.getElementById("cartItems");
-
-  box.innerHTML="";
+  list.innerHTML="";
 
   if(cart.length===0){
 
-    box.innerHTML=`
-
+    list.innerHTML=`
       <div style="
-        text-align:center;
-        padding:50px 10px;
-      ">
-
-        🛒
-
-        <h3>कार्ट खाली है</h3>
-
-        <p>
-          अपनी पसंद की Jewellery जोड़ें।
-        </p>
-
+      text-align:center;
+      padding:30px">
+      🛒 आपका कार्ट खाली है।
       </div>
-
     `;
+
+  }else{
+
+    cart.forEach((item,index)=>{
+
+      const div=document.createElement("div");
+
+      div.className="cart-item";
+
+      div.innerHTML=`
+
+        <div>
+          <strong>${item.name}</strong>
+          <br>
+          <small>₹${item.price.toLocaleString("en-IN")}</small>
+        </div>
+
+        <button
+        onclick="removeCart(${index})"
+        style="
+        border:0;
+        background:#71002e;
+        color:white;
+        padding:8px;
+        border-radius:7px;
+        cursor:pointer">
+        हटाएं
+        </button>
+
+      `;
+
+      list.appendChild(div);
+
+    });
 
   }
 
-  cart.forEach((product,index)=>{
-
-    const item=
-    document.createElement("div");
-
-    item.className="cart-item";
-
-    item.innerHTML=`
-
-      <img src="${product.image}">
-
-      <div class="cart-item-info">
-
-        <h4>
-          ${product.name}
-        </h4>
-
-        <p>
-          Gold
-        </p>
-
-        <strong>
-          ₹${product.price.toLocaleString("en-IN")}
-        </strong>
-
-        <button
-          onclick="removeCart(${index})"
-          style="
-            display:block;
-            margin-top:5px;
-            border:none;
-            background:none;
-            color:#a0003b;
-          "
-        >
-          🗑 हटाएँ
-        </button>
-
-      </div>
-
-    `;
-
-    box.appendChild(item);
-
-  });
-
-
-  const total=
-  cart.reduce(
-    (sum,p)=>sum+p.price,
-    0
+  let total=cart.reduce(
+    (sum,item)=>sum+item.price,0
   );
 
-  document.getElementById(
-    "cartTotal"
-  ).innerText=
-  "₹"+total.toLocaleString("en-IN");
+  document.getElementById("cartTotal")
+  .innerText=
+  "कुल: ₹"+total.toLocaleString("en-IN");
+
+
+  let message="नमस्ते, मुझे ये Jewellery चाहिए:%0A%0A";
+
+  cart.forEach(item=>{
+    message+=
+    "💎 "+item.name+
+    " - ₹"+item.price+
+    "%0A";
+  });
+
+  message+=
+    "%0Aकृपया उपलब्धता और ऑर्डर की जानकारी दें।";
+
+
+  document.getElementById("whatsappOrder").href=
+    "https://wa.me/919999999999?text="+message;
+
+
+  document.getElementById("cartModal")
+  .classList.add("active");
 
 }
 
@@ -1712,269 +1230,60 @@ function removeCart(index){
 
   cart.splice(index,1);
 
-  saveCart();
-
-  renderCart();
-
-}
-
-
-/* ======================================
-   CHECKOUT
-====================================== */
-
-function checkout(){
-
-  if(cart.length===0){
-
-    alert("पहले cart में product जोड़ें।");
-
-    return;
-
-  }
-
-  closeCart();
-
-  document
-  .getElementById("checkoutModal")
-  .classList.add("show");
-
-}
-
-
-function closeCheckout(){
-
-  document
-  .getElementById("checkoutModal")
-  .classList.remove("show");
-
-}
-
-
-/* ======================================
-   PAYMENT
-====================================== */
-
-function goPayment(){
-
-  const name=
-  document.getElementById(
-    "customerName"
-  ).value.trim();
-
-  const phone=
-  document.getElementById(
-    "customerPhone"
-  ).value.trim();
-
-  const city=
-  document.getElementById(
-    "customerCity"
-  ).value.trim();
-
-  const address=
-  document.getElementById(
-    "customerAddress"
-  ).value.trim();
-
-
-  if(!name||!phone||!city||!address){
-
-    alert("कृपया सभी Delivery Details भरें।");
-
-    return;
-
-  }
-
-
-  if(phone.length!==10){
-
-    alert("सही 10 अंकों का मोबाइल नंबर डालें।");
-
-    return;
-
-  }
-
-
-  const total=
-  cart.reduce(
-    (sum,p)=>sum+p.price,
-    0
+  localStorage.setItem(
+    "baisaCart",
+    JSON.stringify(cart)
   );
 
+  updateCartCount();
 
-  document.getElementById(
-    "paymentAmount"
-  ).innerText=
-  total.toLocaleString("en-IN");
-
-
-  closeCheckout();
-
-  document
-  .getElementById("paymentModal")
-  .classList.add("show");
+  openCart();
 
 }
 
 
-function closePayment(){
+function closeCart(){
 
-  document
-  .getElementById("paymentModal")
-  .classList.remove("show");
-
-}
-
-
-/* ======================================
-   COMPLETE ORDER
-====================================== */
-
-function completeOrder(){
-
-  const utr=
-  document.getElementById(
-    "utrNumber"
-  ).value.trim();
-
-  if(!utr){
-
-    alert(
-      "Payment के बाद UTR Number डालें।"
-    );
-
-    return;
-
-  }
-
-
-  const orderId=
-  "BAISA-"+Date.now().toString().slice(-8);
-
-
-  document.getElementById(
-    "orderId"
-  ).innerText=orderId;
-
-
-  closePayment();
-
-
-  document
-  .getElementById("successModal")
-  .classList.add("show");
-
-
-  cart=[];
-
-  saveCart();
+  document.getElementById("cartModal")
+  .classList.remove("active");
 
 }
 
 
-/* ======================================
-   SEARCH
-====================================== */
+/* =========================
+   NAVIGATION
+========================= */
 
-function searchProducts(){
+function goHome(){
 
-  const q=
-  document.getElementById(
-    "searchInput"
-  ).value
-  .toLowerCase()
-  .trim();
-
-
-  if(!q){
-
-    currentProducts=[...products];
-
-    document.getElementById(
-      "productTitle"
-    ).innerText=
-    "लोकप्रिय Gold Jewellery";
-
-    renderProducts();
-
-    return;
-
-  }
-
-
-  currentProducts=
-  products.filter(p=>
-
-    p.name.toLowerCase().includes(q) ||
-
-    p.category.toLowerCase().includes(q)
-
-  );
-
-
-  document.getElementById(
-    "productTitle"
-  ).innerText=
-  "Search Results";
-
-
-  renderProducts();
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
-
-
-/* ======================================
-   METAL FILTER
-====================================== */
-
-function filterMetal(metal,button){
-
-  document
-  .querySelectorAll(".filter")
-  .forEach(b=>
-    b.classList.remove("active")
-  );
-
-  button.classList.add("active");
-
-  if(metal==="all"){
-
-    currentProducts=[...products];
-
-  }else{
-
-    currentProducts=
-    products.filter(
-      p=>p.material===metal
-    );
-
-  }
-
-  renderProducts();
-
-}
-
-
-/* ======================================
-   SCROLL
-====================================== */
 
 function scrollToCategories(){
 
-  document
-  .getElementById("categories")
+  document.getElementById("categories")
   .scrollIntoView({
     behavior:"smooth"
   });
 
 }
-
 
 function scrollToProducts(){
 
-  document
-  .getElementById("products")
+  document.getElementById("products")
+  .scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+function scrollToWhy(){
+
+  document.getElementById("why")
   .scrollIntoView({
     behavior:"smooth"
   });
@@ -1982,22 +1291,19 @@ function scrollToProducts(){
 }
 
 
-/* ======================================
+/* =========================
    START
-====================================== */
+========================= */
 
 document.addEventListener(
-  "DOMContentLoaded",
-  ()=>{
+"DOMContentLoaded",
+function(){
 
-    loadCategories();
+  loadProducts(products);
 
-    renderProducts();
+  updateCartCount();
 
-    updateCartCount();
-
-  }
-);
+});
 
 </script>
 
