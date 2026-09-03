@@ -1,182 +1,121 @@
-// ========================================
+// ==========================================
 // BAISA KA SHRINGAR - MAIN WEBSITE SCRIPT
-// ========================================
+// ==========================================
 
 let cart = [];
 
+// ==========================================
+// DEFAULT CATEGORIES
+// ==========================================
 
-// ========================================
-// CATEGORIES
-// ========================================
-
-const defaultCategories = [
-  {
-    name: "हार",
-    icon: "📿"
-  },
-  {
-    name: "कड़े",
-    icon: "💍"
-  },
-  {
-    name: "अंगूठियाँ",
-    icon: "💎"
-  },
-  {
-    name: "माथा पट्टी",
-    icon: "👑"
-  },
-  {
-    name: "पायल",
-    icon: "✨"
-  },
-  {
-    name: "नथ",
-    icon: "🌸"
-  },
-  {
-    name: "गिफ्ट आइटम",
-    icon: "🎁"
-  }
+const categories = [
+  { name: "हार", icon: "📿", count: "100+ डिज़ाइन" },
+  { name: "कड़े", icon: "💍", count: "100+ डिज़ाइन" },
+  { name: "अंगूठियाँ", icon: "💎", count: "100+ डिज़ाइन" },
+  { name: "माथा पट्टी", icon: "👑", count: "100+ डिज़ाइन" },
+  { name: "पायल", icon: "✨", count: "100+ डिज़ाइन" },
+  { name: "नथ", icon: "🌸", count: "100+ डिज़ाइन" },
+  { name: "गिफ्ट आइटम", icon: "🎁", count: "100+ डिज़ाइन" }
 ];
 
+// ==========================================
+// PRODUCTS
+// ADMIN PANEL से PRODUCTS आएंगे
+// ==========================================
 
-// ========================================
-// GET PRODUCTS FROM ADMIN PANEL
-// ========================================
+let products = {
+  "हार": [],
+  "कड़े": [],
+  "अंगूठियाँ": [],
+  "माथा पट्टी": [],
+  "पायल": [],
+  "नथ": [],
+  "गिफ्ट आइटम": []
+};
 
-function getProducts() {
+// ==========================================
+// ADMIN PANEL से PRODUCTS LOAD
+// ==========================================
 
-  try {
+function loadAdminProducts() {
 
-    const saved =
-      localStorage.getItem("baisa_products");
+  const savedProducts = localStorage.getItem("baisaProducts");
 
-    if (!saved) {
-      return [];
-    }
-
-    const data = JSON.parse(saved);
-
-    if (!Array.isArray(data)) {
-      return [];
-    }
-
-    return data;
-
-  } catch (error) {
-
-    console.error(
-      "Products load error:",
-      error
-    );
-
-    return [];
-
+  if (!savedProducts) {
+    console.log("अभी कोई Admin Product नहीं मिला।");
+    return;
   }
-}
-
-
-// ========================================
-// GET CATEGORIES FROM ADMIN
-// ========================================
-
-function getCategories() {
 
   try {
 
-    const saved =
-      localStorage.getItem("baisa_categories");
+    const adminProducts = JSON.parse(savedProducts);
 
-    if (!saved) {
-      return defaultCategories;
+    if (Array.isArray(adminProducts)) {
+
+      // सभी products को category के अनुसार लगाएं
+      adminProducts.forEach(product => {
+
+        if (!product.category) return;
+
+        if (!products[product.category]) {
+          products[product.category] = [];
+        }
+
+        products[product.category].push(product);
+
+      });
+
     }
 
-    const names = JSON.parse(saved);
+    else if (typeof adminProducts === "object") {
 
-    if (!Array.isArray(names)) {
-      return defaultCategories;
-    }
-
-    return names.map(name => {
-
-      const old =
-        defaultCategories.find(
-          item => item.name === name
-        );
-
-      return {
-        name: name,
-        icon: old ? old.icon : "💎"
+      products = {
+        ...products,
+        ...adminProducts
       };
 
-    });
+    }
+
+    console.log("Admin Products Loaded:", products);
 
   } catch (error) {
 
-    return defaultCategories;
+    console.error("Products load error:", error);
 
   }
-
 }
 
-
-// ========================================
-// LOAD CATEGORIES
-// ========================================
+// ==========================================
+// CATEGORIES LOAD
+// ==========================================
 
 function loadCategories() {
 
-  const categoryGrid =
-    document.getElementById("categoryGrid");
+  const categoryGrid = document.getElementById("categoryGrid");
 
   if (!categoryGrid) return;
-
-  const categories =
-    getCategories();
 
   categoryGrid.innerHTML = "";
 
   categories.forEach(category => {
 
-    const products =
-      getProducts().filter(
-        product =>
-          product.category === category.name
-      );
+    const card = document.createElement("div");
 
-    const card =
-      document.createElement("div");
-
-    card.className =
-      "category-card";
+    card.className = "category-card";
 
     card.innerHTML = `
-
       <div class="category-icon">
         ${category.icon}
       </div>
 
-      <h3>
-        ${escapeHTML(category.name)}
-      </h3>
+      <h3>${category.name}</h3>
 
-      <p>
-        ${products.length} डिज़ाइन
-      </p>
-
+      <p>${category.count}</p>
     `;
 
-    card.addEventListener(
-      "click",
-      function () {
-
-        openCategory(
-          category.name
-        );
-
-      }
-    );
+    card.addEventListener("click", function () {
+      openCategory(category.name);
+    });
 
     categoryGrid.appendChild(card);
 
@@ -184,15 +123,21 @@ function loadCategories() {
 
 }
 
-
-// ========================================
+// ==========================================
 // OPEN CATEGORY
-// ========================================
+// ==========================================
 
 function openCategory(categoryName) {
 
-  const productSection =
-    document.getElementById("products");
+  const title = document.getElementById("productTitle");
+
+  if (title) {
+    title.innerText = categoryName;
+  }
+
+  loadProducts(categoryName);
+
+  const productSection = document.getElementById("products");
 
   if (productSection) {
 
@@ -202,126 +147,77 @@ function openCategory(categoryName) {
 
   }
 
-  const title =
-    document.getElementById(
-      "productTitle"
-    );
-
-  if (title) {
-
-    title.innerText =
-      categoryName;
-
-  }
-
-  loadProducts(categoryName);
-
 }
 
-
-// ========================================
+// ==========================================
 // LOAD PRODUCTS
-// ========================================
+// ==========================================
 
 function loadProducts(categoryName) {
 
-  const productGrid =
-    document.getElementById(
-      "productGrid"
-    );
+  const productGrid = document.getElementById("productGrid");
 
   if (!productGrid) return;
 
-  const allProducts =
-    getProducts();
-
-  const list =
-    allProducts.filter(
-      product =>
-        product.category === categoryName
-    );
+  const list = products[categoryName] || [];
 
   productGrid.innerHTML = "";
 
   if (list.length === 0) {
 
     productGrid.innerHTML = `
-
       <div class="empty-products">
 
         <div>💎</div>
 
-        <h3>
-          ${escapeHTML(categoryName)}
-        </h3>
+        <h3>${categoryName} के डिज़ाइन</h3>
 
         <p>
-          इस कैटेगरी में अभी कोई Design नहीं है।
+          इस कैटेगरी में अभी डिज़ाइन नहीं जोड़े गए हैं।
         </p>
 
       </div>
-
     `;
 
     return;
 
   }
 
-
   list.forEach(product => {
 
-    const card =
-      document.createElement("div");
+    const card = document.createElement("div");
 
-    card.className =
-      "product-card";
-
-
-    const metalText =
-      product.metal === "Gold"
-        ? "🥇 Gold"
-        : "⚪ Silver";
-
+    card.className = "product-card";
 
     card.innerHTML = `
 
-      <div
-        class="product-image-wrap"
-        onclick="openProduct(${product.id})"
-        style="cursor:pointer;"
+      <img
+        src="${product.image || ""}"
+        alt="${product.name || "Jewellery"}"
+        style="
+          width:100%;
+          height:240px;
+          object-fit:cover;
+          border-radius:12px;
+        "
       >
-
-        <img
-          src="${product.image}"
-          alt="${escapeHTML(product.name)}"
-          class="product-image"
-        >
-
-      </div>
 
       <div class="product-info">
 
-        <h3 class="product-name">
-          ${escapeHTML(product.name)}
-        </h3>
+        <h3>${product.name || "Jewellery"}</h3>
 
-        <p class="product-meta">
-          ${metalText}
-        </p>
+        <p>${product.material || ""}</p>
 
-        <strong class="product-price">
-          ₹${Number(product.price || 0)
-            .toLocaleString("en-IN")}
+        <strong>
+          ₹${product.price || "0"}
         </strong>
 
-        <p class="product-description">
-          ${escapeHTML(
-            product.description || ""
-          )}
+        <p>
+          ${product.description || ""}
         </p>
 
         <button
-          onclick="addToCart(${product.id})"
+          onclick="addToCart('${product.id}')"
         >
           🛒 कार्ट में डालें
         </button>
@@ -336,153 +232,135 @@ function loadProducts(categoryName) {
 
 }
 
+// ==========================================
+// ALL PRODUCTS SHOW
+// ==========================================
 
-// ========================================
-// OPEN PRODUCT
-// ========================================
+function loadAllProducts() {
 
-function openProduct(productId) {
+  const productGrid = document.getElementById("productGrid");
 
-  const products =
-    getProducts();
+  if (!productGrid) return;
 
-  const product =
-    products.find(
-      item =>
-        String(item.id) ===
-        String(productId)
-    );
+  productGrid.innerHTML = "";
 
-  if (!product) return;
+  let allProducts = [];
 
+  Object.keys(products).forEach(category => {
 
-  const metalText =
-    product.metal === "Gold"
-      ? "🥇 Gold"
-      : "⚪ Silver";
+    products[category].forEach(product => {
 
+      allProducts.push(product);
 
-  const modal =
-    document.createElement("div");
+    });
 
-  modal.className =
-    "product-modal";
+  });
 
+  if (allProducts.length === 0) {
 
-  modal.innerHTML = `
+    productGrid.innerHTML = `
+      <div class="empty-products">
 
-    <div
-      class="product-modal-overlay"
-      onclick="this.parentElement.remove()"
-    ></div>
+        <div>💎</div>
 
-    <div class="product-modal-box">
+        <h3>अभी कोई Product नहीं है</h3>
 
-      <button
-        class="product-modal-close"
-        onclick="this.parentElement.parentElement.remove()"
-      >
-        ✕
-      </button>
+        <p>
+          Admin Panel से Jewellery जोड़ें।
+        </p>
 
-      <img
-        src="${product.image}"
-        alt="${escapeHTML(product.name)}"
-      >
-
-      <h2>
-        ${escapeHTML(product.name)}
-      </h2>
-
-      <p>
-        ${metalText}
-      </p>
-
-      <h3>
-        ₹${Number(product.price || 0)
-          .toLocaleString("en-IN")}
-      </h3>
-
-      <p>
-        ${escapeHTML(
-          product.description ||
-          "इस Product की जानकारी उपलब्ध नहीं है।"
-        )}
-      </p>
-
-      <button
-        onclick="addToCart(${product.id})"
-      >
-        🛒 कार्ट में डालें
-      </button>
-
-    </div>
-
-  `;
-
-
-  document.body.appendChild(modal);
-
-}
-
-
-// ========================================
-// CART
-// ========================================
-
-function addToCart(productId) {
-
-  const products =
-    getProducts();
-
-  const product =
-    products.find(
-      item =>
-        String(item.id) ===
-        String(productId)
-    );
-
-  if (!product) {
-
-    alert(
-      "Product नहीं मिला।"
-    );
+      </div>
+    `;
 
     return;
 
   }
 
+  allProducts.forEach(product => {
 
-  cart.push(product);
+    const card = document.createElement("div");
 
-  updateCart();
+    card.className = "product-card";
 
+    card.innerHTML = `
 
-  alert(
-    "✅ आइटम कार्ट में जोड़ दिया गया।"
-  );
+      <img
+        src="${product.image || ""}"
+        alt="${product.name || "Jewellery"}"
+        style="
+          width:100%;
+          height:240px;
+          object-fit:cover;
+          border-radius:12px;
+        "
+      >
+
+      <h3>${product.name || "Jewellery"}</h3>
+
+      <p>${product.category || ""}</p>
+
+      <p>${product.material || ""}</p>
+
+      <strong>₹${product.price || "0"}</strong>
+
+      <p>${product.description || ""}</p>
+
+      <button onclick="addToCart('${product.id}')">
+        🛒 कार्ट में डालें
+      </button>
+
+    `;
+
+    productGrid.appendChild(card);
+
+  });
 
 }
 
+// ==========================================
+// CART
+// ==========================================
 
-// ========================================
-// UPDATE CART
-// ========================================
+function addToCart(productId) {
 
-function updateCart() {
+  let foundProduct = null;
 
-  const cartCount =
-    document.getElementById(
-      "cartCount"
+  for (const category in products) {
+
+    const item = products[category].find(
+      product => String(product.id) === String(productId)
     );
 
-  if (cartCount) {
+    if (item) {
 
-    cartCount.innerText =
-      cart.length;
+      foundProduct = item;
+      break;
+
+    }
 
   }
 
+  if (!foundProduct) return;
+
+  cart.push(foundProduct);
+
+  updateCart();
+
+  alert("आइटम कार्ट में जोड़ दिया गया।");
+
+}
+
+// ==========================================
+// UPDATE CART
+// ==========================================
+
+function updateCart() {
+
+  const cartCount = document.getElementById("cartCount");
+
+  if (cartCount) {
+    cartCount.innerText = cart.length;
+  }
 
   localStorage.setItem(
     "baisaCart",
@@ -491,36 +369,25 @@ function updateCart() {
 
 }
 
-
-// ========================================
+// ==========================================
 // LOAD CART
-// ========================================
+// ==========================================
 
 function loadCart() {
 
-  try {
+  const savedCart = localStorage.getItem("baisaCart");
 
-    const saved =
-      localStorage.getItem(
-        "baisaCart"
-      );
+  if (savedCart) {
 
-    if (saved) {
+    try {
 
-      const data =
-        JSON.parse(saved);
+      cart = JSON.parse(savedCart);
 
-      if (Array.isArray(data)) {
+    } catch (error) {
 
-        cart = data;
-
-      }
+      cart = [];
 
     }
-
-  } catch (error) {
-
-    cart = [];
 
   }
 
@@ -528,174 +395,36 @@ function loadCart() {
 
 }
 
-
-// ========================================
+// ==========================================
 // HOME
-// ========================================
+// ==========================================
 
 function goHome() {
 
   window.scrollTo({
-
     top: 0,
-
     behavior: "smooth"
-
   });
 
 }
 
+// ==========================================
+// WEBSITE START
+// ==========================================
 
-// ========================================
-// ESCAPE HTML
-// ========================================
+document.addEventListener("DOMContentLoaded", function () {
 
-function escapeHTML(value) {
+  // सबसे पहले Admin के products लाओ
+  loadAdminProducts();
 
-  return String(value || "")
+  // Categories बनाओ
+  loadCategories();
 
-    .replace(
-      /&/g,
-      "&amp;"
-    )
+  // Cart लाओ
+  loadCart();
 
-    .replace(
-      /</g,
-      "&lt;"
-    )
+  // अगर product section मौजूद है
+  // तो शुरुआत में सभी products दिखाओ
+  loadAllProducts();
 
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-// ========================================
-// ADD MODAL CSS
-// ========================================
-
-function addModalCSS() {
-
-  if (
-    document.getElementById(
-      "productModalCSS"
-    )
-  ) return;
-
-
-  const style =
-    document.createElement("style");
-
-  style.id =
-    "productModalCSS";
-
-
-  style.innerHTML = `
-
-    .product-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .product-modal-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,.65);
-    }
-
-    .product-modal-box {
-      position: relative;
-      z-index: 2;
-      width: min(500px, 95%);
-      max-height: 90vh;
-      overflow-y: auto;
-      background: white;
-      border-radius: 18px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,.3);
-    }
-
-    .product-modal-box img {
-      width: 100%;
-      max-height: 420px;
-      object-fit: contain;
-      border-radius: 14px;
-      background: #f7eee8;
-    }
-
-    .product-modal-box h2 {
-      margin: 15px 0 8px;
-    }
-
-    .product-modal-box h3 {
-      font-size: 24px;
-      margin: 10px 0;
-    }
-
-    .product-modal-box button {
-      border: none;
-      background: #70002d;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .product-modal-close {
-      position: absolute;
-      right: 12px;
-      top: 12px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: none;
-      background: white;
-      color: #70002d;
-      font-size: 18px;
-      cursor: pointer;
-      z-index: 5;
-    }
-
-  `;
-
-
-  document.head.appendChild(style);
-
-}
-
-
-// ========================================
-// START
-// ========================================
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
-
-    addModalCSS();
-
-    loadCategories();
-
-    loadCart();
-
-  }
-);
+});
