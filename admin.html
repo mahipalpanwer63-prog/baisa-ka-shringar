@@ -4,122 +4,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>बाईसा का श्रृंगार | Admin Panel</title>
+  <title>Admin Panel | बाईसा का श्रृंगार</title>
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: Arial, "Noto Sans Devanagari", sans-serif;
-      background: #fff8f1;
-      color: #4b1025;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff7ef;
+      color: #4a1028;
     }
 
-    /* TOP BAR */
-    .topbar {
-      background: #70002d;
+    header {
+      background: #85002f;
       color: white;
-      padding: 18px 30px;
+      padding: 18px 25px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     }
 
-    .brand {
-      font-size: 23px;
-      font-weight: bold;
+    header h2 {
+      margin: 0;
+      font-size: 22px;
     }
 
-    .brand small {
-      display: block;
-      font-size: 11px;
-      font-weight: normal;
-      opacity: .85;
-      margin-top: 3px;
-    }
-
-    .admin-badge {
-      background: rgba(255,255,255,.15);
-      padding: 9px 15px;
-      border-radius: 20px;
+    header span {
       font-size: 13px;
     }
 
-    /* MAIN */
     .container {
       width: 94%;
-      max-width: 1250px;
+      max-width: 1200px;
       margin: 30px auto;
     }
 
-    .heading {
-      margin-bottom: 25px;
+    .dashboard-title {
+      margin-bottom: 20px;
     }
 
-    .heading h1 {
-      font-size: 28px;
-      margin-bottom: 7px;
+    .dashboard-title h1 {
+      margin-bottom: 5px;
     }
 
-    .heading p {
+    .dashboard-title p {
+      margin-top: 0;
       color: #777;
-      font-size: 14px;
     }
 
-    .dashboard {
+    .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 25px;
+      gap: 20px;
     }
 
-    .card {
+    .box {
       background: white;
-      border: 1px solid #ead7c8;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 5px 20px rgba(80,20,20,.07);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
-    .card h2 {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #70002d;
+    .box h2 {
+      margin-top: 0;
+      font-size: 19px;
     }
 
-    /* FORM */
-    .form-group {
-      margin-bottom: 17px;
-    }
-
-    .form-group label {
+    label {
       display: block;
-      font-size: 14px;
+      margin-top: 15px;
+      margin-bottom: 6px;
       font-weight: bold;
-      margin-bottom: 7px;
+      font-size: 14px;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      padding: 12px 13px;
-      border: 1px solid #dfc8b7;
-      border-radius: 9px;
-      background: #fffdfb;
+      padding: 12px;
+      border: 1px solid #e3c9b5;
+      border-radius: 8px;
       font-size: 14px;
-      outline: none;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #9a1749;
-      box-shadow: 0 0 0 2px rgba(154,23,73,.08);
+      background: #fff;
     }
 
     textarea {
@@ -127,119 +97,108 @@
       resize: vertical;
     }
 
-    /* PHOTO */
+    /* PHOTO UPLOAD */
+
     .photo-upload-box {
-      border: 2px dashed #c89052;
-      border-radius: 13px;
-      min-height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: 2px dashed #b87333;
+      border-radius: 12px;
+      padding: 25px;
       text-align: center;
-      background: #fffaf4;
       cursor: pointer;
-      overflow: hidden;
-      padding: 15px;
+      background: #fffaf5;
     }
 
     .photo-upload-box:hover {
-      background: #fff5e9;
+      background: #fff3e8;
     }
 
-    .upload-content {
-      cursor: pointer;
-      width: 100%;
+    .photo-icon {
+      font-size: 42px;
+      margin-bottom: 8px;
     }
 
-    .camera {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    .upload-title {
+    .photo-upload-box strong {
       display: block;
-      color: #70002d;
       font-size: 17px;
-      font-weight: bold;
+      color: #85002f;
     }
 
-    .upload-subtitle {
+    .photo-upload-box span {
       display: block;
-      color: #888;
-      font-size: 12px;
-      margin-top: 6px;
+      margin-top: 5px;
+      color: #777;
+      font-size: 13px;
     }
 
     #photoPreview {
       display: none;
       width: 100%;
-      max-height: 260px;
+      max-height: 300px;
       object-fit: contain;
+      margin-top: 15px;
       border-radius: 10px;
+      border: 1px solid #ddd;
     }
 
-    /* BUTTON */
-    .btn {
+    button {
       border: none;
-      border-radius: 9px;
-      padding: 12px 18px;
+      border-radius: 8px;
+      padding: 11px 18px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 14px;
     }
 
-    .btn-primary {
-      background: #70002d;
-      color: white;
+    .save-btn {
       width: 100%;
-    }
-
-    .btn-primary:hover {
-      background: #92003d;
-    }
-
-    .btn-add {
-      background: #a96b1d;
+      margin-top: 20px;
+      background: #85002f;
       color: white;
+      font-size: 16px;
     }
 
-    .btn-delete {
-      background: #8e123b;
-      color: white;
-      padding: 7px 11px;
-      font-size: 12px;
+    .save-btn:hover {
+      background: #a4003b;
     }
 
-    /* CATEGORY */
     .category-add {
       display: flex;
       gap: 8px;
-      margin-bottom: 15px;
     }
 
     .category-add input {
       flex: 1;
     }
 
+    .add-btn {
+      background: #b87333;
+      color: white;
+    }
+
     .category-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      margin-top: 15px;
     }
 
     .category-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 1px solid #ead7c8;
-      background: #fffaf6;
-      padding: 10px 12px;
-      border-radius: 9px;
-      font-size: 14px;
+      background: #fff8f0;
+      border: 1px solid #efd9c6;
+      padding: 9px 12px;
+      border-radius: 8px;
+      margin-bottom: 7px;
+    }
+
+    .delete-btn {
+      background: #9c1743;
+      color: white;
+      padding: 6px 10px;
+      font-size: 12px;
     }
 
     /* PRODUCTS */
-    .products-card {
+
+    .products-box {
       margin-top: 25px;
     }
 
@@ -247,14 +206,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      border-bottom: 1px solid #ead7c7;
+      padding-bottom: 10px;
     }
 
     .product-count {
-      background: #70002d;
+      background: #85002f;
       color: white;
-      border-radius: 20px;
       padding: 6px 12px;
+      border-radius: 20px;
       font-size: 12px;
     }
 
@@ -262,788 +222,881 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 15px;
+      margin-top: 20px;
     }
 
-    .product {
-      border: 1px solid #ead7c8;
+    .product-card {
+      border: 1px solid #ead7c7;
       border-radius: 12px;
       overflow: hidden;
       background: white;
     }
 
-    .product-image {
+    .product-card img {
       width: 100%;
-      height: 180px;
+      height: 190px;
       object-fit: cover;
-      background: #f6eee8;
+      display: block;
     }
 
     .product-info {
       padding: 12px;
     }
 
-    .product-name {
-      font-weight: bold;
-      margin-bottom: 6px;
+    .product-info h3 {
+      margin: 0 0 5px;
+      font-size: 16px;
     }
 
-    .product-meta {
-      font-size: 12px;
-      color: #777;
-      line-height: 1.6;
+    .product-info p {
+      margin: 4px 0;
+      font-size: 13px;
+      color: #666;
     }
 
-    .product-price {
-      color: #70002d;
+    .price {
+      color: #85002f;
       font-weight: bold;
-      font-size: 17px;
-      margin: 8px 0;
+      font-size: 16px;
+    }
+
+    .product-delete {
+      width: 100%;
+      margin-top: 10px;
+      background: #9c1743;
+      color: white;
     }
 
     .empty {
       text-align: center;
-      padding: 35px;
+      padding: 40px;
       color: #888;
-      border: 1px dashed #ddc9bb;
-      border-radius: 12px;
     }
 
-    /* MESSAGE */
-    #message {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      background: #70002d;
-      color: white;
-      padding: 13px 18px;
-      border-radius: 9px;
-      display: none;
-      z-index: 1000;
-      box-shadow: 0 5px 20px rgba(0,0,0,.2);
+    .notice {
+      margin-top: 15px;
+      background: #fff4d8;
+      border: 1px solid #e7cc91;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #704d00;
     }
 
-    /* MOBILE */
-    @media (max-width: 900px) {
-      .dashboard {
+    @media (max-width: 800px) {
+
+      .grid {
         grid-template-columns: 1fr;
       }
 
       .products-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
     }
 
-    @media (max-width: 600px) {
-      .topbar {
-        padding: 15px;
-      }
-
-      .brand {
-        font-size: 18px;
-      }
-
-      .container {
-        width: 92%;
-      }
+    @media (max-width: 500px) {
 
       .products-grid {
         grid-template-columns: 1fr;
       }
 
-      .category-add {
-        flex-direction: column;
-      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- TOP BAR -->
-  <header class="topbar">
-    <div class="brand">
-      👑 बाईसा का श्रृंगार
-      <small>Private Admin Panel</small>
-    </div>
+<header>
 
-    <div class="admin-badge">
-      🔒 Admin Control
-    </div>
-  </header>
+  <h2>💎 बाईसा का श्रृंगार</h2>
+
+  <span>🔐 Private Admin Panel</span>
+
+</header>
 
 
-  <main class="container">
+<div class="container">
 
-    <div class="heading">
-      <h1>Admin Dashboard</h1>
-      <p>यहाँ से आप Jewellery Products और Categories को manage कर सकते हैं।</p>
-    </div>
+  <div class="dashboard-title">
 
+    <h1>Admin Dashboard</h1>
 
-    <section class="dashboard">
+    <p>
+      यहाँ से Jewellery Products और Categories manage करें।
+    </p>
 
-      <!-- ADD PRODUCT -->
-      <div class="card">
-
-        <h2>📦 नया सामान जोड़ें</h2>
-
-        <form id="productForm">
-
-          <!-- PHOTO -->
-          <div class="form-group">
-            <label>Product Photo</label>
-
-            <div class="photo-upload-box"
-                 onclick="document.getElementById('productPhoto').click()">
-
-              <div class="upload-content" id="uploadContent">
-
-                <div class="camera">📷</div>
-
-                <span class="upload-title">
-                  Photo Upload करें
-                </span>
-
-                <span class="upload-subtitle">
-                  नई ज्वेलरी की फोटो चुनें
-                </span>
-
-              </div>
-
-              <img
-                id="photoPreview"
-                src=""
-                alt="Product Preview"
-              >
-
-            </div>
-
-            <input
-              type="file"
-              id="productPhoto"
-              accept="image/*"
-              style="display:none;"
-            >
-          </div>
+  </div>
 
 
-          <!-- NAME -->
-          <div class="form-group">
-            <label for="productName">
-              सामान का नाम
-            </label>
+  <div class="grid">
 
-            <input
-              type="text"
-              id="productName"
-              placeholder="जैसे Royal Bridal Haar"
-              required
-            >
-          </div>
+    <!-- ================================= -->
+    <!-- PRODUCT ADD -->
+    <!-- ================================= -->
+
+    <div class="box">
+
+      <h2>💎 नया सामान जोड़ें</h2>
 
 
-          <!-- CATEGORY -->
-          <div class="form-group">
-            <label for="productCategory">
-              Category
-            </label>
+      <!-- PHOTO -->
 
-            <select id="productCategory" required>
-            </select>
-          </div>
-
-
-          <!-- METAL -->
-          <div class="form-group">
-            <label for="productMetal">
-              Metal
-            </label>
-
-            <select id="productMetal">
-              <option value="Gold">🥇 Gold</option>
-              <option value="Silver">⚪ Silver</option>
-            </select>
-          </div>
-
-
-          <!-- PRICE -->
-          <div class="form-group">
-            <label for="productPrice">
-              Price
-            </label>
-
-            <input
-              type="number"
-              id="productPrice"
-              placeholder="399"
-              min="0"
-              required
-            >
-          </div>
-
-
-          <!-- DESCRIPTION -->
-          <div class="form-group">
-            <label for="productDescription">
-              Description
-            </label>
-
-            <textarea
-              id="productDescription"
-              placeholder="Product की जानकारी लिखें..."
-            ></textarea>
-          </div>
-
-
-          <button
-            type="submit"
-            class="btn btn-primary"
-          >
-            ➕ Product Add करें
-          </button>
-
-        </form>
-
-      </div>
-
-
-      <!-- CATEGORY MANAGEMENT -->
-      <div class="card">
-
-        <h2>📂 Category Management</h2>
-
-        <div class="category-add">
-
-          <input
-            type="text"
-            id="newCategory"
-            placeholder="जैसे नाक की नथ"
-          >
-
-          <button
-            class="btn btn-add"
-            onclick="addCategory()"
-          >
-            + Add
-          </button>
-
-        </div>
-
-        <div
-          id="categoryList"
-          class="category-list"
-        ></div>
-
-      </div>
-
-    </section>
-
-
-    <!-- PRODUCTS -->
-    <section class="card products-card">
-
-      <div class="products-header">
-
-        <h2>
-          📋 मेरे Products
-        </h2>
-
-        <span
-          id="productCount"
-          class="product-count"
-        >
-          0 Products
-        </span>
-
-      </div>
+      <label>Product Photo</label>
 
       <div
-        id="productsGrid"
-        class="products-grid"
+        class="photo-upload-box"
+        onclick="document.getElementById('productPhoto').click()"
+      >
+
+        <div class="photo-icon">📷</div>
+
+        <strong>Photo Upload करें</strong>
+
+        <span>
+          नई Jewellery की फोटो चुनें
+        </span>
+
+        <input
+          type="file"
+          id="productPhoto"
+          accept="image/*"
+          style="display:none;"
+        >
+
+        <img
+          id="photoPreview"
+          alt="Product Preview"
+        >
+
+      </div>
+
+
+      <!-- PRODUCT NAME -->
+
+      <label>सामान का नाम</label>
+
+      <input
+        type="text"
+        id="productName"
+        placeholder="जैसे Royal Bridal Haar"
+      >
+
+
+      <!-- CATEGORY -->
+
+      <label>Category</label>
+
+      <select id="productCategory"></select>
+
+
+      <!-- METAL -->
+
+      <label>Metal</label>
+
+      <select id="productMetal">
+
+        <option value="Gold">🥇 Gold</option>
+
+        <option value="Silver">🥈 Silver</option>
+
+        <option value="Artificial">💎 Artificial</option>
+
+        <option value="Diamond">💠 Diamond</option>
+
+      </select>
+
+
+      <!-- PRICE -->
+
+      <label>Price</label>
+
+      <input
+        type="number"
+        id="productPrice"
+        placeholder="399"
+      >
+
+
+      <!-- DESCRIPTION -->
+
+      <label>Description</label>
+
+      <textarea
+        id="productDescription"
+        placeholder="Product की जानकारी लिखें..."
+      ></textarea>
+
+
+      <button
+        class="save-btn"
+        onclick="saveProduct()"
+      >
+        ＋ Product Save करें
+      </button>
+
+
+      <div class="notice">
+
+        ⚠️ Product इसी browser में save होगा और इसी website
+        पर दिखाई देगा।
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- CATEGORY MANAGEMENT -->
+    <!-- ================================= -->
+
+    <div class="box">
+
+      <h2>📁 Category Management</h2>
+
+      <label>नई Category बनाएँ</label>
+
+      <div class="category-add">
+
+        <input
+          type="text"
+          id="newCategory"
+          placeholder="जैसे नथ"
+        >
+
+        <button
+          class="add-btn"
+          onclick="addCategory()"
+        >
+          + Add
+        </button>
+
+      </div>
+
+
+      <div
+        class="category-list"
+        id="categoryList"
       ></div>
 
-    </section>
+    </div>
 
-  </main>
-
-
-  <div id="message"></div>
+  </div>
 
 
-  <script>
+  <!-- ================================= -->
+  <!-- PRODUCTS -->
+  <!-- ================================= -->
 
-    /* =========================================
-       DEFAULT CATEGORIES
-    ========================================= */
+  <div class="box products-box">
 
-    const defaultCategories = [
-      "हार",
-      "कड़े",
-      "अंगूठियाँ",
-      "माथा पट्टी",
-      "पायल",
-      "नथ",
-      "गिफ्ट आइटम"
-    ];
+    <div class="products-header">
 
+      <h2>📦 मेरे Products</h2>
 
-    /* =========================================
-       GET DATA
-    ========================================= */
+      <span
+        class="product-count"
+        id="productCount"
+      >
+        0 Products
+      </span>
 
-    let categories =
-      JSON.parse(localStorage.getItem("baisa_categories")) ||
-      defaultCategories;
-
-    let products =
-      JSON.parse(localStorage.getItem("baisa_products")) ||
-      [];
+    </div>
 
 
-    /* =========================================
-       SAVE DATA
-    ========================================= */
+    <div
+      class="products-grid"
+      id="adminProducts"
+    ></div>
 
-    function saveCategories() {
+  </div>
 
-      localStorage.setItem(
-        "baisa_categories",
-        JSON.stringify(categories)
+</div>
+
+
+<script>
+
+  // ==========================================
+  // STORAGE KEYS
+  // ==========================================
+
+  const PRODUCT_KEY = "baisaProducts";
+
+  const CATEGORY_KEY = "baisaCategories";
+
+
+  // ==========================================
+  // DEFAULT CATEGORIES
+  // ==========================================
+
+  const defaultCategories = [
+    "हार",
+    "कड़े",
+    "अंगूठियाँ",
+    "माथा पट्टी",
+    "पायल",
+    "नथ",
+    "गिफ्ट आइटम"
+  ];
+
+
+  let categories = [];
+
+  let products = [];
+
+  let selectedImage = "";
+
+
+  // ==========================================
+  // LOAD DATA
+  // ==========================================
+
+  function loadData() {
+
+    try {
+
+      const savedCategories =
+        localStorage.getItem(CATEGORY_KEY);
+
+      if (savedCategories) {
+
+        categories = JSON.parse(savedCategories);
+
+      } else {
+
+        categories = [...defaultCategories];
+
+        saveCategories();
+
+      }
+
+
+      const savedProducts =
+        localStorage.getItem(PRODUCT_KEY);
+
+      if (savedProducts) {
+
+        products = JSON.parse(savedProducts);
+
+      } else {
+
+        products = [];
+
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      categories = [...defaultCategories];
+
+      products = [];
+
+    }
+
+    loadCategorySelect();
+
+    loadCategoryList();
+
+    loadProducts();
+
+  }
+
+
+  // ==========================================
+  // SAVE CATEGORIES
+  // ==========================================
+
+  function saveCategories() {
+
+    localStorage.setItem(
+      CATEGORY_KEY,
+      JSON.stringify(categories)
+    );
+
+  }
+
+
+  // ==========================================
+  // CATEGORY SELECT
+  // ==========================================
+
+  function loadCategorySelect() {
+
+    const select =
+      document.getElementById("productCategory");
+
+    select.innerHTML = "";
+
+    categories.forEach(category => {
+
+      const option =
+        document.createElement("option");
+
+      option.value = category;
+
+      option.textContent = category;
+
+      select.appendChild(option);
+
+    });
+
+  }
+
+
+  // ==========================================
+  // CATEGORY LIST
+  // ==========================================
+
+  function loadCategoryList() {
+
+    const list =
+      document.getElementById("categoryList");
+
+    list.innerHTML = "";
+
+    categories.forEach((category, index) => {
+
+      const div =
+        document.createElement("div");
+
+      div.className = "category-item";
+
+      div.innerHTML = `
+
+        <span>📁 ${category}</span>
+
+        <button
+          class="delete-btn"
+          onclick="deleteCategory(${index})"
+        >
+          Delete
+        </button>
+
+      `;
+
+      list.appendChild(div);
+
+    });
+
+  }
+
+
+  // ==========================================
+  // ADD CATEGORY
+  // ==========================================
+
+  function addCategory() {
+
+    const input =
+      document.getElementById("newCategory");
+
+    const name =
+      input.value.trim();
+
+    if (!name) {
+
+      alert("Category का नाम लिखें।");
+
+      return;
+
+    }
+
+
+    if (categories.includes(name)) {
+
+      alert("यह Category पहले से मौजूद है।");
+
+      return;
+
+    }
+
+
+    categories.push(name);
+
+    saveCategories();
+
+    input.value = "";
+
+    loadCategorySelect();
+
+    loadCategoryList();
+
+    alert("Category जोड़ दी गई।");
+
+  }
+
+
+  // ==========================================
+  // DELETE CATEGORY
+  // ==========================================
+
+  function deleteCategory(index) {
+
+    if (categories.length <= 1) {
+
+      alert("कम से कम एक Category रखें।");
+
+      return;
+
+    }
+
+
+    const name = categories[index];
+
+
+    const confirmDelete =
+      confirm(
+        `"${name}" Category delete करनी है?`
       );
 
-    }
+
+    if (!confirmDelete) return;
 
 
-    function saveProducts() {
+    categories.splice(index, 1);
 
-      localStorage.setItem(
-        "baisa_products",
-        JSON.stringify(products)
-      );
+    saveCategories();
 
-    }
+    loadCategorySelect();
 
+    loadCategoryList();
 
-    /* =========================================
-       MESSAGE
-    ========================================= */
-
-    function showMessage(text) {
-
-      const message =
-        document.getElementById("message");
-
-      message.innerText = text;
-
-      message.style.display = "block";
-
-      setTimeout(() => {
-        message.style.display = "none";
-      }, 2500);
-
-    }
+  }
 
 
-    /* =========================================
-       CATEGORY DROPDOWN
-    ========================================= */
+  // ==========================================
+  // PHOTO UPLOAD
+  // ==========================================
 
-    function renderCategoryDropdown() {
+  document
+    .getElementById("productPhoto")
+    .addEventListener("change", function () {
 
-      const select =
-        document.getElementById("productCategory");
+      const file = this.files[0];
 
-      select.innerHTML = "";
+      if (!file) {
 
-      categories.forEach(category => {
+        selectedImage = "";
 
-        const option =
-          document.createElement("option");
-
-        option.value = category;
-        option.textContent = category;
-
-        select.appendChild(option);
-
-      });
-
-    }
-
-
-    /* =========================================
-       CATEGORY LIST
-    ========================================= */
-
-    function renderCategories() {
-
-      const list =
-        document.getElementById("categoryList");
-
-      list.innerHTML = "";
-
-      categories.forEach((category, index) => {
-
-        const div =
-          document.createElement("div");
-
-        div.className = "category-item";
-
-        div.innerHTML = `
-          <span>📁 ${escapeHTML(category)}</span>
-
-          <button
-            class="btn btn-delete"
-            onclick="deleteCategory(${index})"
-          >
-            Delete
-          </button>
-        `;
-
-        list.appendChild(div);
-
-      });
-
-    }
-
-
-    /* =========================================
-       ADD CATEGORY
-    ========================================= */
-
-    function addCategory() {
-
-      const input =
-        document.getElementById("newCategory");
-
-      const name =
-        input.value.trim();
-
-      if (!name) {
-
-        alert("पहले Category का नाम लिखें।");
+        document
+          .getElementById("photoPreview")
+          .style.display = "none";
 
         return;
+
       }
 
 
-      if (
-        categories.some(
-          c => c.toLowerCase() === name.toLowerCase()
-        )
-      ) {
+      if (!file.type.startsWith("image/")) {
 
-        alert("यह Category पहले से मौजूद है।");
+        alert("कृपया केवल फोटो चुनें।");
+
+        this.value = "";
 
         return;
+
       }
 
 
-      categories.push(name);
+      const reader =
+        new FileReader();
 
-      saveCategories();
 
-      input.value = "";
+      reader.onload = function (event) {
 
-      renderCategories();
+        selectedImage =
+          event.target.result;
 
-      renderCategoryDropdown();
 
-      showMessage("✅ नई Category जोड़ दी गई।");
+        const preview =
+          document.getElementById(
+            "photoPreview"
+          );
+
+
+        preview.src =
+          selectedImage;
+
+
+        preview.style.display =
+          "block";
+
+      };
+
+
+      reader.readAsDataURL(file);
+
+    });
+
+
+  // ==========================================
+  // SAVE PRODUCT
+  // ==========================================
+
+  function saveProduct() {
+
+    const name =
+      document
+        .getElementById("productName")
+        .value
+        .trim();
+
+
+    const category =
+      document
+        .getElementById("productCategory")
+        .value;
+
+
+    const metal =
+      document
+        .getElementById("productMetal")
+        .value;
+
+
+    const price =
+      document
+        .getElementById("productPrice")
+        .value;
+
+
+    const description =
+      document
+        .getElementById("productDescription")
+        .value
+        .trim();
+
+
+    // VALIDATION
+
+    if (!selectedImage) {
+
+      alert("पहले Product की Photo Upload करें।");
+
+      return;
 
     }
 
 
-    /* =========================================
-       DELETE CATEGORY
-    ========================================= */
+    if (!name) {
 
-    function deleteCategory(index) {
+      alert("Product का नाम लिखें।");
 
-      if (categories.length <= 1) {
-
-        alert("कम से कम एक Category रहनी चाहिए।");
-
-        return;
-      }
-
-
-      const name = categories[index];
-
-      const used =
-        products.some(
-          product => product.category === name
-        );
-
-
-      if (used) {
-
-        alert(
-          "इस Category में Product मौजूद है। पहले उस Product को हटाएँ।"
-        );
-
-        return;
-      }
-
-
-      if (
-        !confirm(
-          `"${name}" Category delete करनी है?`
-        )
-      ) {
-
-        return;
-      }
-
-
-      categories.splice(index, 1);
-
-      saveCategories();
-
-      renderCategories();
-
-      renderCategoryDropdown();
-
-      showMessage("🗑️ Category delete हो गई।");
+      return;
 
     }
 
 
-    /* =========================================
-       PHOTO UPLOAD
-    ========================================= */
+    if (!category) {
 
-    const productPhoto =
-      document.getElementById("productPhoto");
+      alert("Category चुनें।");
 
-    const photoPreview =
-      document.getElementById("photoPreview");
+      return;
 
-    const uploadContent =
-      document.getElementById("uploadContent");
+    }
 
 
-    productPhoto.addEventListener(
-      "change",
-      function () {
+    if (!price) {
 
-        const file = this.files[0];
+      alert("Price डालें।");
 
-        if (!file) {
+      return;
 
-          photoPreview.style.display = "none";
-
-          uploadContent.style.display = "block";
-
-          return;
-        }
+    }
 
 
-        if (!file.type.startsWith("image/")) {
+    // PRODUCT OBJECT
 
-          alert("कृपया केवल Photo चुनें।");
+    const product = {
 
-          this.value = "";
+      id:
+        Date.now().toString(),
 
-          return;
-        }
+      name:
+        name,
+
+      category:
+        category,
+
+      material:
+        metal,
+
+      price:
+        price,
+
+      description:
+        description,
+
+      image:
+        selectedImage,
+
+      createdAt:
+        new Date().toISOString()
+
+    };
 
 
-        const reader =
-          new FileReader();
+    // SAVE
+
+    products.push(product);
 
 
-        reader.onload = function(event) {
-
-          photoPreview.src =
-            event.target.result;
-
-          photoPreview.style.display =
-            "block";
-
-          uploadContent.style.display =
-            "none";
-
-        };
-
-
-        reader.readAsDataURL(file);
-
-      }
+    localStorage.setItem(
+      PRODUCT_KEY,
+      JSON.stringify(products)
     );
 
 
-    /* =========================================
-       ADD PRODUCT
-    ========================================= */
+    // RESET
 
     document
-      .getElementById("productForm")
-      .addEventListener(
-        "submit",
-        function(event) {
-
-          event.preventDefault();
+      .getElementById("productName")
+      .value = "";
 
 
-          if (!productPhoto.files[0]) {
-
-            alert("पहले Product की Photo चुनें।");
-
-            return;
-          }
+    document
+      .getElementById("productPrice")
+      .value = "";
 
 
-          const product = {
-
-            id:
-              Date.now(),
-
-            name:
-              document
-                .getElementById("productName")
-                .value
-                .trim(),
-
-            category:
-              document
-                .getElementById("productCategory")
-                .value,
-
-            metal:
-              document
-                .getElementById("productMetal")
-                .value,
-
-            price:
-              Number(
-                document
-                  .getElementById("productPrice")
-                  .value
-              ),
-
-            description:
-              document
-                .getElementById("productDescription")
-                .value
-                .trim(),
-
-            image:
-              photoPreview.src,
-
-            createdAt:
-              new Date().toISOString()
-
-          };
+    document
+      .getElementById("productDescription")
+      .value = "";
 
 
-          products.unshift(product);
-
-          saveProducts();
-
-          renderProducts();
+    document
+      .getElementById("productPhoto")
+      .value = "";
 
 
-          /* RESET */
-
-          document
-            .getElementById("productForm")
-            .reset();
-
-          photoPreview.src = "";
-
-          photoPreview.style.display =
-            "none";
-
-          uploadContent.style.display =
-            "block";
+    selectedImage = "";
 
 
-          showMessage(
-            "✅ Product सफलतापूर्वक Add हो गया।"
-          );
-
-        }
+    const preview =
+      document.getElementById(
+        "photoPreview"
       );
 
 
-    /* =========================================
-       RENDER PRODUCTS
-    ========================================= */
+    preview.src = "";
 
-    function renderProducts() {
-
-      const grid =
-        document.getElementById("productsGrid");
-
-      const count =
-        document.getElementById("productCount");
+    preview.style.display = "none";
 
 
-      count.innerText =
-        `${products.length} Products`;
+    // REFRESH
+
+    loadProducts();
 
 
-      grid.innerHTML = "";
+    alert(
+      "✅ Product successfully save हो गया!"
+    );
+
+  }
 
 
-      if (products.length === 0) {
+  // ==========================================
+  // LOAD PRODUCTS
+  // ==========================================
 
-        grid.innerHTML = `
-          <div class="empty" style="grid-column:1/-1;">
-            अभी कोई Product Add नहीं किया गया है।
-          </div>
-        `;
+  function loadProducts() {
 
-        return;
-      }
-
-
-      products.forEach(product => {
-
-        const div =
-          document.createElement("div");
-
-        div.className = "product";
+    const container =
+      document.getElementById(
+        "adminProducts"
+      );
 
 
-        div.innerHTML = `
+    const count =
+      document.getElementById(
+        "productCount"
+      );
+
+
+    container.innerHTML = "";
+
+
+    count.innerText =
+      products.length +
+      " Products";
+
+
+    if (products.length === 0) {
+
+      container.innerHTML = `
+
+        <div class="empty">
+
+          💎
+
+          <h3>
+            अभी कोई Product नहीं है
+          </h3>
+
+          <p>
+            ऊपर से पहला Product जोड़ें।
+          </p>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    products
+      .slice()
+      .reverse()
+      .forEach(product => {
+
+
+        const card =
+          document.createElement(
+            "div"
+          );
+
+
+        card.className =
+          "product-card";
+
+
+        card.innerHTML = `
 
           <img
-            class="product-image"
             src="${product.image}"
-            alt="${escapeHTML(product.name)}"
+            alt="${product.name}"
           >
 
           <div class="product-info">
 
-            <div class="product-name">
-              ${escapeHTML(product.name)}
+            <h3>
+              ${product.name}
+            </h3>
+
+            <p>
+              📁 ${product.category}
+            </p>
+
+            <p>
+              ${product.material}
+            </p>
+
+            <div class="price">
+              ₹${product.price}
             </div>
 
-            <div class="product-meta">
-              📂 ${escapeHTML(product.category)}
-              <br>
-              ${product.metal === "Gold"
-                ? "🥇 Gold"
-                : "⚪ Silver"
-              }
-            </div>
-
-            <div class="product-price">
-              ₹${Number(product.price).toLocaleString("en-IN")}
-            </div>
-
-            <div class="product-meta">
-              ${escapeHTML(product.description || "कोई Description नहीं")}
-            </div>
-
-            <br>
+            <p>
+              ${product.description || ""}
+            </p>
 
             <button
-              class="btn btn-delete"
-              onclick="deleteProduct(${product.id})"
+              class="product-delete"
+              onclick="deleteProduct('${product.id}')"
             >
-              🗑️ Delete Product
+              🗑 Delete Product
             </button>
 
           </div>
@@ -1051,84 +1104,61 @@
         `;
 
 
-        grid.appendChild(div);
+        container.appendChild(card);
 
       });
 
-    }
+  }
 
 
-    /* =========================================
-       DELETE PRODUCT
-    ========================================= */
+  // ==========================================
+  // DELETE PRODUCT
+  // ==========================================
 
-    function deleteProduct(id) {
+  function deleteProduct(id) {
 
-      const product =
-        products.find(
-          p => p.id === id
-        );
-
-
-      if (!product) return;
-
-
-      if (
-        !confirm(
-          `"${product.name}" को delete करना है?`
-        )
-      ) {
-
-        return;
-      }
-
-
-      products =
-        products.filter(
-          p => p.id !== id
-        );
-
-
-      saveProducts();
-
-      renderProducts();
-
-      showMessage(
-        "🗑️ Product delete हो गया।"
+    const confirmDelete =
+      confirm(
+        "क्या यह Product delete करना है?"
       );
 
+
+    if (!confirmDelete) return;
+
+
+    products =
+      products.filter(
+        product =>
+          String(product.id) !==
+          String(id)
+      );
+
+
+    localStorage.setItem(
+      PRODUCT_KEY,
+      JSON.stringify(products)
+    );
+
+
+    loadProducts();
+
+  }
+
+
+  // ==========================================
+  // START
+  // ==========================================
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+      loadData();
+
     }
+  );
 
-
-    /* =========================================
-       HTML SECURITY
-    ========================================= */
-
-    function escapeHTML(value) {
-
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
-
-
-    /* =========================================
-       INITIAL LOAD
-    ========================================= */
-
-    saveCategories();
-
-    renderCategories();
-
-    renderCategoryDropdown();
-
-    renderProducts();
-
-  </script>
+</script>
 
 </body>
 </html>
