@@ -1,1 +1,859 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | बाईसा का श्रृंगार</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f1e9;
+      color: #4b1026;
+    }
+
+    .top {
+      background: #69002d;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top h1 {
+      font-size: 25px;
+    }
+
+    .top span {
+      font-size: 13px;
+      opacity: .9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .title {
+      margin-bottom: 25px;
+    }
+
+    .title h2 {
+      color: #69002d;
+      margin-bottom: 7px;
+    }
+
+    .title p {
+      color: #765f54;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .box {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      border: 1px solid #e4ceb0;
+      box-shadow: 0 8px 25px rgba(60,20,20,.07);
+    }
+
+    .box h3 {
+      color: #69002d;
+      margin-bottom: 20px;
+      font-size: 21px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d9c4ad;
+      border-radius: 9px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    /* PHOTO UPLOAD */
+
+    .upload-area {
+      border: 2px dashed #b18a53;
+      border-radius: 15px;
+      padding: 30px 15px;
+      text-align: center;
+      background: #fffaf2;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .upload-icon {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .upload-area strong {
+      display: block;
+      color: #69002d;
+      margin-bottom: 5px;
+    }
+
+    .upload-area small {
+      color: #806c60;
+    }
+
+    #photoInput {
+      display: none;
+    }
+
+    #photoPreview {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: none;
+      margin: 15px auto;
+      border: 2px solid #d0ad75;
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      padding: 13px;
+      border-radius: 25px;
+      background: #69002d;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #850039;
+    }
+
+    .category-add {
+      display: flex;
+      gap: 10px;
+    }
+
+    .category-add button {
+      width: 130px;
+      border: none;
+      border-radius: 9px;
+      background: #a46a21;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .category-list {
+      margin-top: 20px;
+    }
+
+    .category-item {
+      background: #fff8ef;
+      border: 1px solid #ead8c0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .delete-category {
+      border: none;
+      background: #8b173d;
+      color: white;
+      border-radius: 15px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .products {
+      margin-top: 25px;
+    }
+
+    .product-row {
+      background: #fffaf4;
+      border: 1px solid #ead8c0;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .product-row img {
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-info strong {
+      color: #69002d;
+    }
+
+    .delete-product {
+      border: none;
+      background: #9b183f;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 18px;
+      cursor: pointer;
+    }
+
+    .notice {
+      margin-top: 15px;
+      padding: 12px;
+      background: #fff6dc;
+      border: 1px solid #e1c36c;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #684d20;
+    }
+
+    @media(max-width: 750px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .top {
+        gap: 10px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .product-row {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top">
+    <div>
+      <h1>👑 बाईसा का श्रृंगार</h1>
+      <span>Private Admin Panel</span>
+    </div>
+
+    <div>
+      🔐 Admin Control
+    </div>
+  </div>
+
+
+  <main class="container">
+
+    <div class="title">
+      <h2>Admin Dashboard</h2>
+      <p>यहाँ से अपने Jewellery Products और Categories को manage करें।</p>
+    </div>
+
+
+    <div class="admin-grid">
+
+      <!-- PRODUCT ADD -->
+
+      <div class="box">
+
+        <h3>📦 नया सामान जोड़ें</h3>
+
+        <div class="form-group">
+
+          <label>Product Photo</label>
+
+          <label for="photoInput" class="upload-area">
+
+            <div class="upload-icon">
+              📸
+            </div>
+
+            <strong>
+              Photo Upload करें
+            </strong>
+
+            <small>
+              यहाँ क्लिक करके फोटो चुनें
+            </small>
+
+          </label>
+
+          <input
+            type="file"
+            id="photoInput"
+            accept="image/*"
+          >
+
+          <img
+            id="photoPreview"
+            alt="Photo Preview"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>सामान का नाम</label>
+
+          <input
+            type="text"
+            id="productName"
+            placeholder="जैसे Royal Bridal Haar"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Category</label>
+
+          <select id="productCategory">
+
+            <option value="हार">हार</option>
+            <option value="कड़े">कड़े</option>
+            <option value="अंगूठियाँ">अंगूठियाँ</option>
+            <option value="माथा पट्टी">माथा पट्टी</option>
+            <option value="पायल">पायल</option>
+            <option value="नथ">नथ</option>
+            <option value="गिफ्ट आइटम">गिफ्ट आइटम</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Metal</label>
+
+          <select id="productMetal">
+
+            <option value="Gold">🥇 Gold</option>
+            <option value="Silver">🥈 Silver</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Price</label>
+
+          <input
+            type="number"
+            id="productPrice"
+            placeholder="399"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Description</label>
+
+          <textarea
+            id="productDescription"
+            placeholder="Product की जानकारी..."
+          ></textarea>
+
+        </div>
+
+
+        <button
+          class="btn"
+          onclick="addProduct()"
+        >
+          ➕ Product Save करें
+        </button>
+
+
+        <div class="notice">
+          ⚠️ अभी यह शुरुआती Admin Panel है। अगले steps में इसे
+          permanent database और photo storage से connect करेंगे।
+        </div>
+
+      </div>
+
+
+      <!-- CATEGORY MANAGEMENT -->
+
+      <div class="box">
+
+        <h3>📂 Category Management</h3>
+
+        <div class="form-group">
+
+          <label>नई Category बनाएँ</label>
+
+          <div class="category-add">
+
+            <input
+              type="text"
+              id="newCategory"
+              placeholder="जैसे नथ"
+            >
+
+            <button onclick="addCategory()">
+              + Add
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="category-list" id="categoryList">
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div class="box products">
+
+      <h3>💎 आपके Products</h3>
+
+      <div id="productList">
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+<script>
+
+let categories =
+  JSON.parse(
+    localStorage.getItem("baisaCategories")
+  ) || [
+    "हार",
+    "कड़े",
+    "अंगूठियाँ",
+    "माथा पट्टी",
+    "पायल",
+    "नथ",
+    "गिफ्ट आइटम"
+  ];
+
+
+let products =
+  JSON.parse(
+    localStorage.getItem("baisaProducts")
+  ) || [];
+
+let selectedPhoto = "";
+
+
+/* PHOTO UPLOAD */
+
+document
+  .getElementById("photoInput")
+  .addEventListener("change", function(event) {
+
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+      selectedPhoto = e.target.result;
+
+      const preview =
+        document.getElementById("photoPreview");
+
+      preview.src = selectedPhoto;
+
+      preview.style.display = "block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+
+/* ADD PRODUCT */
+
+function addProduct() {
+
+  const name =
+    document.getElementById("productName").value.trim();
+
+  const category =
+    document.getElementById("productCategory").value;
+
+  const metal =
+    document.getElementById("productMetal").value;
+
+  const price =
+    document.getElementById("productPrice").value;
+
+  const description =
+    document.getElementById("productDescription").value.trim();
+
+
+  if (!selectedPhoto) {
+    alert("पहले Product Photo चुनें।");
+    return;
+  }
+
+  if (!name) {
+    alert("Product का नाम डालें।");
+    return;
+  }
+
+  if (!price) {
+    alert("Price डालें।");
+    return;
+  }
+
+
+  const product = {
+
+    id: Date.now(),
+
+    name: name,
+
+    category: category,
+
+    metal: metal,
+
+    price: price,
+
+    description: description,
+
+    image: selectedPhoto
+
+  };
+
+
+  products.push(product);
+
+  localStorage.setItem(
+    "baisaProducts",
+    JSON.stringify(products)
+  );
+
+
+  alert("✅ Product Save हो गया।");
+
+
+  document.getElementById("productName").value = "";
+  document.getElementById("productPrice").value = "";
+  document.getElementById("productDescription").value = "";
+
+  document.getElementById("photoInput").value = "";
+
+  document.getElementById("photoPreview").style.display = "none";
+
+  selectedPhoto = "";
+
+  showProducts();
+
+}
+
+
+/* ADD CATEGORY */
+
+function addCategory() {
+
+  const input =
+    document.getElementById("newCategory");
+
+  const name =
+    input.value.trim();
+
+
+  if (!name) {
+
+    alert("Category का नाम डालें।");
+
+    return;
+  }
+
+
+  if (categories.includes(name)) {
+
+    alert("यह Category पहले से मौजूद है।");
+
+    return;
+  }
+
+
+  categories.push(name);
+
+
+  localStorage.setItem(
+    "baisaCategories",
+    JSON.stringify(categories)
+  );
+
+
+  input.value = "";
+
+  showCategories();
+
+  alert("✅ नई Category बन गई।");
+
+}
+
+
+/* SHOW CATEGORIES */
+
+function showCategories() {
+
+  const list =
+    document.getElementById("categoryList");
+
+  list.innerHTML = "";
+
+
+  categories.forEach(function(category, index) {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "category-item";
+
+
+    item.innerHTML = `
+
+      <span>
+        📂 ${category}
+      </span>
+
+      <button
+        class="delete-category"
+        onclick="deleteCategory(${index})"
+      >
+        Delete
+      </button>
+
+    `;
+
+
+    list.appendChild(item);
+
+  });
+
+
+  updateCategorySelect();
+
+}
+
+
+/* DELETE CATEGORY */
+
+function deleteCategory(index) {
+
+  if (
+    !confirm(
+      "क्या आप इस Category को हटाना चाहते हैं?"
+    )
+  ) {
+    return;
+  }
+
+
+  categories.splice(index, 1);
+
+
+  localStorage.setItem(
+    "baisaCategories",
+    JSON.stringify(categories)
+  );
+
+
+  showCategories();
+
+}
+
+
+/* CATEGORY SELECT UPDATE */
+
+function updateCategorySelect() {
+
+  const select =
+    document.getElementById("productCategory");
+
+  select.innerHTML = "";
+
+
+  categories.forEach(function(category) {
+
+    const option =
+      document.createElement("option");
+
+    option.value = category;
+
+    option.textContent = category;
+
+    select.appendChild(option);
+
+  });
+
+}
+
+
+/* SHOW PRODUCTS */
+
+function showProducts() {
+
+  const list =
+    document.getElementById("productList");
+
+  list.innerHTML = "";
+
+
+  if (products.length === 0) {
+
+    list.innerHTML = `
+      <p>
+        अभी कोई Product नहीं है।
+      </p>
+    `;
+
+    return;
+  }
+
+
+  products.forEach(function(product, index) {
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "product-row";
+
+
+    row.innerHTML = `
+
+      <img
+        src="${product.image}"
+        alt="${product.name}"
+      >
+
+      <div class="product-info">
+
+        <strong>
+          ${product.name}
+        </strong>
+
+        <br>
+
+        ${product.metal}
+        •
+        ₹${product.price}
+
+        <br>
+
+        <small>
+          ${product.category}
+        </small>
+
+      </div>
+
+      <button
+        class="delete-product"
+        onclick="deleteProduct(${index})"
+      >
+        Delete
+      </button>
+
+    `;
+
+
+    list.appendChild(row);
+
+  });
+
+}
+
+
+/* DELETE PRODUCT */
+
+function deleteProduct(index) {
+
+  if (
+    !confirm(
+      "क्या आप इस Product को delete करना चाहते हैं?"
+    )
+  ) {
+    return;
+  }
+
+
+  products.splice(index, 1);
+
+
+  localStorage.setItem(
+    "baisaProducts",
+    JSON.stringify(products)
+  );
+
+
+  showProducts();
+
+}
+
+
+/* START */
+
+showCategories();
+
+showProducts();
+
+</script>
+
+</body>
+</html>
