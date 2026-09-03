@@ -1,158 +1,265 @@
-// ================================
-// BAISA KA SHRINGAR - MAIN SCRIPT
-// ================================
+// ======================================================
+// BAISA KA SHRINGAR - MAIN WEBSITE SCRIPT
+// Admin Panel से Products पढ़कर Website पर दिखाएगा
+// ======================================================
 
 let cart = [];
 
 
-// ================================
-// CATEGORY DATA
-// ================================
+// ======================================================
+// CATEGORIES
+// ======================================================
 
-const categories = [
+const defaultCategories = [
   {
     name: "हार",
-    icon: "📿",
-    count: "100+ डिज़ाइन"
+    icon: "📿"
   },
   {
     name: "कड़े",
-    icon: "💍",
-    count: "100+ डिज़ाइन"
+    icon: "💍"
   },
   {
     name: "अंगूठियाँ",
-    icon: "💎",
-    count: "100+ डिज़ाइन"
+    icon: "💎"
   },
   {
     name: "माथा पट्टी",
-    icon: "👑",
-    count: "100+ डिज़ाइन"
+    icon: "👑"
   },
   {
     name: "पायल",
-    icon: "✨",
-    count: "100+ डिज़ाइन"
+    icon: "✨"
   },
   {
     name: "नथ",
-    icon: "🌸",
-    count: "100+ डिज़ाइन"
+    icon: "🌸"
   },
   {
     name: "गिफ्ट आइटम",
-    icon: "🎁",
-    count: "100+ डिज़ाइन"
+    icon: "🎁"
   }
 ];
 
 
-// ================================
+// ======================================================
+// GET ADMIN PRODUCTS
+// ======================================================
+
+function getAdminProducts() {
+
+  const possibleKeys = [
+    "baisaProducts",
+    "products",
+    "baisaProductData",
+    "jewelleryProducts",
+    "baisaProductsData"
+  ];
+
+  for (const key of possibleKeys) {
+
+    const saved = localStorage.getItem(key);
+
+    if (!saved) continue;
+
+    try {
+
+      const data = JSON.parse(saved);
+
+      if (Array.isArray(data)) {
+        return data;
+      }
+
+      if (data && typeof data === "object") {
+
+        let allProducts = [];
+
+        Object.keys(data).forEach(category => {
+
+          if (Array.isArray(data[category])) {
+
+            data[category].forEach(product => {
+
+              allProducts.push({
+                ...product,
+                category:
+                  product.category || category
+              });
+
+            });
+
+          }
+
+        });
+
+        if (allProducts.length > 0) {
+          return allProducts;
+        }
+
+      }
+
+    } catch (error) {
+
+      console.log(
+        "Product data read error:",
+        key,
+        error
+      );
+
+    }
+
+  }
+
+  return [];
+}
+
+
+// ======================================================
+// NORMALIZE PRODUCTS
+// ======================================================
+
+function getProductsByCategory(categoryName) {
+
+  const adminProducts = getAdminProducts();
+
+  return adminProducts.filter(product => {
+
+    const category =
+      product.category ||
+      product.categoryName ||
+      product.type ||
+      "";
+
+    return String(category).trim() ===
+      String(categoryName).trim();
+
+  });
+
+}
+
+
+// ======================================================
 // LOAD CATEGORIES
-// ================================
+// ======================================================
 
 function loadCategories() {
 
-  const categoryGrid = document.getElementById("categoryGrid");
+  const categoryGrid =
+    document.getElementById("categoryGrid");
 
   if (!categoryGrid) return;
 
   categoryGrid.innerHTML = "";
 
-  categories.forEach((category, index) => {
+  defaultCategories.forEach(category => {
 
-    const card = document.createElement("div");
+    const products =
+      getProductsByCategory(category.name);
+
+    const count =
+      products.length > 0
+        ? products.length + "+ डिज़ाइन"
+        : "50+ डिज़ाइन";
+
+    const card =
+      document.createElement("div");
 
     card.className = "category-card";
 
     card.innerHTML = `
+
       <div class="category-icon">
         ${category.icon}
       </div>
 
-      <h3>${category.name}</h3>
+      <h3>
+        ${category.name}
+      </h3>
 
-      <p>${category.count}</p>
+      <p>
+        ${count}
+      </p>
+
     `;
 
-    card.addEventListener("click", function () {
-      openCategory(category.name);
-    });
+    card.addEventListener(
+      "click",
+      function () {
+
+        openCategory(category.name);
+
+      }
+    );
 
     categoryGrid.appendChild(card);
 
   });
+
 }
 
 
-// ================================
+// ======================================================
 // OPEN CATEGORY
-// ================================
+// ======================================================
 
 function openCategory(categoryName) {
 
-  const productSection = document.getElementById("products");
+  const productSection =
+    document.getElementById("products");
 
   if (productSection) {
+
     productSection.scrollIntoView({
       behavior: "smooth"
     });
+
   }
 
-  const title = document.getElementById("productTitle");
+  const title =
+    document.getElementById("productTitle");
 
   if (title) {
-    title.innerText = categoryName;
+
+    title.innerText =
+      categoryName;
+
   }
 
   loadProducts(categoryName);
+
 }
 
 
-// ================================
-// PRODUCT DATA
-// ================================
-
-const products = {
-
-  "हार": [],
-
-  "कड़े": [],
-
-  "अंगूठियाँ": [],
-
-  "माथा पट्टी": [],
-
-  "पायल": [],
-
-  "नथ": [],
-
-  "गिफ्ट आइटम": []
-
-};
-
-
-// ================================
+// ======================================================
 // LOAD PRODUCTS
-// ================================
+// ======================================================
 
 function loadProducts(categoryName) {
 
-  const productGrid = document.getElementById("productGrid");
+  const productGrid =
+    document.getElementById("productGrid");
 
   if (!productGrid) return;
 
-  const list = products[categoryName] || [];
+  const list =
+    getProductsByCategory(categoryName);
 
   productGrid.innerHTML = "";
+
+
+  // ----------------------------------------------------
+  // NO PRODUCTS
+  // ----------------------------------------------------
 
   if (list.length === 0) {
 
     productGrid.innerHTML = `
+
       <div class="empty-products">
 
-        <div>💎</div>
+        <div style="font-size:50px;">
+          💎
+        </div>
 
         <h3>
           ${categoryName} के डिज़ाइन
@@ -163,40 +270,123 @@ function loadProducts(categoryName) {
         </p>
 
       </div>
+
     `;
 
     return;
+
   }
 
 
+  // ----------------------------------------------------
+  // PRODUCTS
+  // ----------------------------------------------------
+
   list.forEach(product => {
 
-    const card = document.createElement("div");
+    const card =
+      document.createElement("div");
 
-    card.className = "product-card";
+    card.className =
+      "product-card";
+
+
+    const image =
+      product.image ||
+      product.photo ||
+      product.photoUrl ||
+      product.imageUrl ||
+      "";
+
+
+    const name =
+      product.name ||
+      product.title ||
+      "सुंदर आभूषण";
+
+
+    const material =
+      product.material ||
+      product.metal ||
+      "Premium Jewellery";
+
+
+    const price =
+      product.price ||
+      "0";
+
+
+    const id =
+      product.id ||
+      product.productId ||
+      Date.now();
+
 
     card.innerHTML = `
 
-      <img
-        src="${product.image}"
-        alt="${product.name}"
-      >
+      <div class="product-image">
 
-      <h3>${product.name}</h3>
+        ${
+          image
+            ? `
+              <img
+                src="${image}"
+                alt="${name}"
+                loading="lazy"
+              >
+            `
+            : `
+              <div
+                style="
+                  height:220px;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-size:60px;
+                "
+              >
+                💎
+              </div>
+            `
+        }
 
-      <p>${product.material}</p>
+      </div>
 
-      <strong>
-        ₹${product.price}
-      </strong>
 
-      <button
-        onclick="addToCart('${product.id}')"
-      >
-        कार्ट में डालें
-      </button>
+      <div class="product-info">
+
+        <h3>
+          ${name}
+        </h3>
+
+        <p>
+          ${material}
+        </p>
+
+        <strong>
+          ₹${price}
+        </strong>
+
+        <div class="product-buttons">
+
+          <button
+            onclick="viewProduct('${id}')"
+          >
+            देखें
+          </button>
+
+          <button
+            onclick="addToCart('${id}')"
+          >
+            कार्ट में डालें
+          </button>
+
+        </div>
+
+      </div>
 
     `;
+
 
     productGrid.appendChild(card);
 
@@ -205,50 +395,278 @@ function loadProducts(categoryName) {
 }
 
 
-// ================================
-// CART
-// ================================
+// ======================================================
+// FIND SINGLE PRODUCT
+// ======================================================
 
-function addToCart(productId) {
+function findProduct(productId) {
 
-  let foundProduct = null;
+  const allProducts =
+    getAdminProducts();
 
-  for (const category in products) {
+  return allProducts.find(product => {
 
-    const item = products[category].find(
-      product => product.id === productId
-    );
+    return String(
+      product.id ||
+      product.productId
+    ) === String(productId);
 
-    if (item) {
-      foundProduct = item;
-      break;
-    }
-
-  }
-
-  if (!foundProduct) return;
-
-  cart.push(foundProduct);
-
-  updateCart();
-
-  alert("आइटम कार्ट में जोड़ दिया गया।");
+  });
 
 }
 
 
-// ================================
+// ======================================================
+// VIEW PRODUCT
+// ======================================================
+
+function viewProduct(productId) {
+
+  const product =
+    findProduct(productId);
+
+  if (!product) {
+
+    alert(
+      "Product नहीं मिला।"
+    );
+
+    return;
+
+  }
+
+
+  const image =
+    product.image ||
+    product.photo ||
+    product.photoUrl ||
+    product.imageUrl ||
+    "";
+
+
+  const name =
+    product.name ||
+    product.title ||
+    "सुंदर आभूषण";
+
+
+  const material =
+    product.material ||
+    product.metal ||
+    "Premium Jewellery";
+
+
+  const price =
+    product.price ||
+    "0";
+
+
+  // ----------------------------------------------------
+  // PRODUCT MODAL
+  // ----------------------------------------------------
+
+  let modal =
+    document.getElementById(
+      "productModal"
+    );
+
+
+  if (!modal) {
+
+    modal =
+      document.createElement("div");
+
+    modal.id =
+      "productModal";
+
+
+    modal.style.cssText = `
+
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.65);
+      z-index:99999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+
+    `;
+
+
+    document.body.appendChild(modal);
+
+  }
+
+
+  modal.innerHTML = `
+
+    <div
+      style="
+        background:#fff;
+        width:100%;
+        max-width:500px;
+        max-height:90vh;
+        overflow:auto;
+        border-radius:18px;
+        padding:20px;
+        position:relative;
+      "
+    >
+
+      <button
+        onclick="
+          document.getElementById('productModal').remove()
+        "
+        style="
+          position:absolute;
+          right:15px;
+          top:15px;
+          width:35px;
+          height:35px;
+          border:0;
+          border-radius:50%;
+          cursor:pointer;
+          font-size:20px;
+        "
+      >
+        ×
+      </button>
+
+
+      ${
+        image
+          ? `
+            <img
+              src="${image}"
+              alt="${name}"
+              style="
+                width:100%;
+                max-height:400px;
+                object-fit:contain;
+                border-radius:12px;
+              "
+            >
+          `
+          : `
+            <div
+              style="
+                height:300px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:80px;
+              "
+            >
+              💎
+            </div>
+          `
+      }
+
+
+      <h2>
+        ${name}
+      </h2>
+
+
+      <p>
+        ${material}
+      </p>
+
+
+      <h2>
+        ₹${price}
+      </h2>
+
+
+      ${
+        product.description
+          ? `
+            <p>
+              ${product.description}
+            </p>
+          `
+          : ""
+      }
+
+
+      <button
+        onclick="
+          addToCart('${product.id || product.productId}');
+          document.getElementById('productModal').remove();
+        "
+        style="
+          width:100%;
+          padding:14px;
+          border:0;
+          border-radius:10px;
+          background:#800020;
+          color:white;
+          font-size:16px;
+          cursor:pointer;
+        "
+      >
+        🛒 कार्ट में डालें
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+// ======================================================
+// CART
+// ======================================================
+
+function addToCart(productId) {
+
+  const product =
+    findProduct(productId);
+
+  if (!product) {
+
+    alert(
+      "Product नहीं मिला।"
+    );
+
+    return;
+
+  }
+
+
+  cart.push(product);
+
+  updateCart();
+
+
+  alert(
+    "आइटम कार्ट में जोड़ दिया गया।"
+  );
+
+}
+
+
+// ======================================================
 // UPDATE CART
-// ================================
+// ======================================================
 
 function updateCart() {
 
   const cartCount =
-    document.getElementById("cartCount");
+    document.getElementById(
+      "cartCount"
+    );
+
 
   if (cartCount) {
-    cartCount.innerText = cart.length;
+
+    cartCount.innerText =
+      cart.length;
+
   }
+
 
   localStorage.setItem(
     "baisaCart",
@@ -258,20 +676,30 @@ function updateCart() {
 }
 
 
-// ================================
-// LOAD SAVED CART
-// ================================
+// ======================================================
+// LOAD CART
+// ======================================================
 
 function loadCart() {
 
   const savedCart =
-    localStorage.getItem("baisaCart");
+    localStorage.getItem(
+      "baisaCart"
+    );
+
 
   if (savedCart) {
 
     try {
 
-      cart = JSON.parse(savedCart);
+      cart =
+        JSON.parse(savedCart);
+
+      if (!Array.isArray(cart)) {
+
+        cart = [];
+
+      }
 
     } catch (error) {
 
@@ -281,28 +709,142 @@ function loadCart() {
 
   }
 
+
   updateCart();
 
 }
 
 
-// ================================
-// HOME BUTTON
-// ================================
+// ======================================================
+// HOME
+// ======================================================
 
 function goHome() {
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+
+    top:0,
+
+    behavior:"smooth"
+
   });
 
 }
 
 
-// ================================
+// ======================================================
+// PHOTO PREVIEW
+// ======================================================
+
+function setupPhotoUpload() {
+
+  const productPhoto =
+    document.getElementById(
+      "productPhoto"
+    );
+
+
+  const photoPreview =
+    document.getElementById(
+      "photoPreview"
+    );
+
+
+  if (
+    !productPhoto ||
+    !photoPreview
+  ) {
+
+    return;
+
+  }
+
+
+  productPhoto.addEventListener(
+    "change",
+    function () {
+
+      const file =
+        this.files[0];
+
+
+      if (!file) {
+
+        photoPreview.style.display =
+          "none";
+
+        return;
+
+      }
+
+
+      if (
+        !file.type.startsWith(
+          "image/"
+        )
+      ) {
+
+        alert(
+          "कृपया केवल फोटो चुनें।"
+        );
+
+        this.value = "";
+
+        return;
+
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function (event) {
+
+          photoPreview.src =
+            event.target.result;
+
+          photoPreview.style.display =
+            "block";
+
+        };
+
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+}
+
+
+// ======================================================
+// REFRESH PRODUCTS
+// ======================================================
+
+function refreshProducts() {
+
+  const title =
+    document.getElementById(
+      "productTitle"
+    );
+
+
+  if (title && title.innerText) {
+
+    loadProducts(
+      title.innerText
+    );
+
+  }
+
+}
+
+
+// ======================================================
 // START WEBSITE
-// ================================
+// ======================================================
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -312,37 +854,7 @@ document.addEventListener(
 
     loadCart();
 
+    setupPhotoUpload();
+
   }
 );
-// ===============================
-// PRODUCT PHOTO UPLOAD & PREVIEW
-// ===============================
-
-const productPhoto = document.getElementById("productPhoto");
-const photoPreview = document.getElementById("photoPreview");
-
-if (productPhoto && photoPreview) {
-  productPhoto.addEventListener("change", function () {
-    const file = this.files[0];
-
-    if (!file) {
-      photoPreview.style.display = "none";
-      return;
-    }
-
-    if (!file.type.startsWith("image/")) {
-      alert("कृपया केवल फोटो चुनें।");
-      this.value = "";
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = function (event) {
-      photoPreview.src = event.target.result;
-      photoPreview.style.display = "block";
-    };
-
-    reader.readAsDataURL(file);
-  });
-}
