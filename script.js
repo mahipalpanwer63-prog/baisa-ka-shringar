@@ -314,3 +314,35 @@ document.addEventListener(
 
   }
 );
+// ===============================
+// PRODUCT PHOTO UPLOAD & PREVIEW
+// ===============================
+
+const productPhoto = document.getElementById("productPhoto");
+const photoPreview = document.getElementById("photoPreview");
+
+if (productPhoto && photoPreview) {
+  productPhoto.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (!file) {
+      photoPreview.style.display = "none";
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      alert("कृपया केवल फोटो चुनें।");
+      this.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      photoPreview.src = event.target.result;
+      photoPreview.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
